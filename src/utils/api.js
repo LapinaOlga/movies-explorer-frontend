@@ -62,10 +62,12 @@ class Api {
   }
 }
 
-export default new Api({
-  baseUri: process.env.REACT_APP_BACKEND_URL,
+const instance = new Api({
+  baseUri: process.env.REACT_APP_BACKEND_URL || 'https://api.lapaliv.com',
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
   },
 })
+
+export default instance;

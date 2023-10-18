@@ -23,7 +23,7 @@ export default function AboutMe() {
           </div>
         </div>
         <div>
-          <img src={student} alt="student photo" className="about-me__photo"/>
+          <img src={student} alt="student" className="about-me__photo"/>
         </div>
       </div>
     </div>

@@ -4,14 +4,11 @@ import './ProfileButton.scss'
 
 export default function ProfileButton(props) {
   const classNames = ['profile-button']
-  let iconButtonVariant;
 
-  if(props.variant === 'white') {
+  if (props.variant === 'white') {
     classNames.push(`profile-button--${props.variant}`)
-    iconButtonVariant = 'green';
   } else {
     classNames.push(`profile-button--black`)
-    iconButtonVariant = 'gray-3';
   }
 
   return (

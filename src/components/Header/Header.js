@@ -8,7 +8,6 @@ import {useContext, useEffect, useState} from "react";
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 import {Link, useLocation} from "react-router-dom";
 import Nav from "../Nav/Nav";
-import userIcon from '../../images/user.svg'
 import ProfileButton from "../ProfileButton/ProfileButton";
 
 export default function Header(props) {
