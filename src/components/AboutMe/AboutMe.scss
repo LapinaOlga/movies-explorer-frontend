@@ -1,0 +1,139 @@
+@import "../../scss/index";
+
+.about-me {
+    &__content {
+        display: flex;
+        flex-wrap: nowrap;
+
+        @include desktop {
+            gap: 270px;
+            flex-direction: row;
+            margin-top: 66px;
+        }
+
+        @include tablet {
+            gap: 49px;
+            flex-direction: row;
+            margin-top: 66px;
+        }
+
+        @include mobile {
+            gap: 40px;
+            flex-direction: column-reverse;
+            margin-top: 60px;
+        }
+    }
+
+    &__photo {
+        @include desktop {
+            width: 270px;
+        }
+
+        @include tablet {
+            width: 255px;
+        }
+
+        @include mobile {
+            width: 100%;
+            border-radius: 10px;
+        }
+    }
+
+    &__name {
+        color: $black;
+        font-family: $base-font-family;
+        font-style: normal;
+        font-weight: 400;
+
+        @include desktop {
+            font-size: 50px;
+            letter-spacing: -2px;
+            line-height: 58px;
+        }
+
+        @include tablet {
+            font-size: 40px;
+            letter-spacing: -1.6px;
+            line-height: 40px;
+        }
+
+        @include mobile {
+            font-size: 30px;
+            line-height: normal;
+            letter-spacing: -1.2px;
+        }
+    }
+
+    &__position {
+        color: $black;
+        font-feature-settings: 'clig' off, 'liga' off;
+        font-family: $base-font-family;
+        font-style: normal;
+        font-weight: 500;
+
+        @include desktop {
+            font-size: 18px;
+            margin-top: 18px;
+            line-height: 20px;
+        }
+
+        @include tablet {
+            font-size: 12px;
+            margin-top: 16px;
+            line-height: 20px;
+        }
+
+        @include mobile {
+            font-size: 11px;
+            line-height: 16px;
+            margin-top: 20px;
+        }
+    }
+
+    &__summary {
+        color: $black;
+        font-feature-settings: 'clig' off, 'liga' off;
+        font-family: $base-font-family;
+        font-style: normal;
+        font-weight: 400;
+
+        @include desktop {
+            font-size: 14px;
+            line-height: 22px;
+            margin-top: 26px;
+        }
+
+        @include tablet {
+            font-size: 12px;
+            line-height: 18px;
+            margin-top: 20px;
+        }
+
+        @include mobile {
+            font-size: 11px;
+            line-height: 16px;
+            margin-top: 20px;
+        }
+    }
+
+    &__github {
+        color: $black;
+        font-family: $base-font-family;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+
+        @include desktop {
+            margin-top: 99px;
+        }
+
+        @include tablet {
+            margin-top: 87px;
+        }
+
+        @include mobile {
+            margin-top: 40px;
+        }
+    }
+}

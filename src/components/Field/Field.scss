@@ -1,0 +1,56 @@
+@import "../../scss";
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+
+    &__label {
+        color: $gray-8;
+        font-family: $base-font-family;
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    &__input {
+        border-radius: 8px;
+        background: $gray-3;
+        padding: 15px;
+        color: $black;
+        font-family: $base-font-family;
+        font-size: 13px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        border: none;
+        outline: none;
+
+        &:focus {
+            outline: none;
+            border: none;
+        }
+    }
+
+    &--invalid &__input {
+        color: $red;
+    }
+
+    &--invalid input:-webkit-autofill {
+        -webkit-text-fill-color: $red;
+    }
+
+    &__feedback {
+        font-family: $base-font-family;
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    &--invalid &__feedback {
+        color: $red;
+    }
+}

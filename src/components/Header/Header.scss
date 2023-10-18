@@ -1,0 +1,97 @@
+@import "../../scss/index";
+
+.header {
+    height: 74px;
+    padding: 18px 0;
+    box-sizing: border-box;
+    background-color: $white;
+    color: $black;
+
+    &--primary {
+        background-color: $primary;
+        color: $white;
+    }
+
+    &__container {
+        display: flex;
+        flex-wrap: nowrap;
+    }
+
+    &__left {
+        display: flex;
+        flex-direction: row;
+        flex-grow: 1;
+        gap: 45px;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    &__right {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 10px;
+    }
+
+    &__dektop {
+        display: none;
+
+        @include desktop {
+            display: block;
+        }
+    }
+
+    &__not-dektop {
+        display: none;
+
+        @include tablet {
+            display: block;
+        }
+
+        @include mobile {
+            display: block;
+        }
+    }
+
+    //&__label {
+    //    font-family: $base-font-family;
+    //    font-size: 12px;
+    //    font-style: normal;
+    //    font-weight: 500;
+    //    line-height: 16px;
+    //    border: none;
+    //}
+
+    //&__account {
+    //    display: flex;
+    //    flex-direction: row;
+    //    align-items: center;
+    //    justify-content: flex-end;
+    //    gap: 18px;
+    //
+    //    @include tablet {
+    //        display: none;
+    //    }
+    //
+    //    @include mobile {
+    //        display: none;
+    //    }
+    //}
+
+    &__sandwitch {
+        padding: 0;
+
+        @include desktop {
+            display: none;
+        }
+
+        @include tablet {
+            display: block;
+        }
+
+        @include mobile {
+            display: block;
+        }
+    }
+}

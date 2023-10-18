@@ -1,0 +1,46 @@
+@import "../../scss/index";
+
+.section-title {
+    display: flex;
+    flex-direction: column;
+
+    @include desktop {
+        gap: 23px;
+    }
+
+    @include tablet {
+        gap: 23px;
+    }
+
+    @include mobile {
+        gap: 28px;
+    }
+
+    &__text {
+        color: $black;
+        font-family: $base-font-family;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+
+        @include desktop {
+            font-size: 22px;
+            letter-spacing: -0.88px;
+        }
+
+        @include tablet {
+            font-size: 22px;
+            letter-spacing: -0.88px;
+        }
+
+        @include mobile {
+            font-size: 18px;
+            letter-spacing: -0.72px;
+        }
+    }
+
+    &__divider {
+        height: 1px;
+        background-color: $black;
+    }
+}

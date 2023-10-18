@@ -1,0 +1,35 @@
+@import "../../scss";
+
+.movies-card-list {
+    padding: 70px 0 0 0;
+
+    &__content {
+        width: 100%;
+        display: grid;
+        grid-auto-flow: dense;
+        padding-bottom: 30px;
+
+        @include desktop {
+            grid-template-columns: repeat(auto-fit, minmax(calc(100% / 3 - 23px * 2), 1fr));
+            gap: 30px 23px;
+        }
+
+        @include tablet {
+            grid-template-columns: repeat(auto-fit, minmax(calc(50% - 30px), 1fr));
+            gap: 50px 30px;
+        }
+
+        @include mobile {
+            grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+            gap: 16px;
+        }
+    }
+
+    &__footer {
+        padding: 50px 0 80px 0;
+    }
+
+    &__button {
+        width: 100%;
+    }
+}

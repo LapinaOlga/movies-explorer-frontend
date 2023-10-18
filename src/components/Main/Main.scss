@@ -1,0 +1,85 @@
+@import "../../scss/index";
+
+.main {
+    &__header {
+        background: $primary;
+        padding: 75px 0;
+    }
+
+    &__promo {
+        background: $primary;
+
+        @include desktop {
+            padding: 75px 0;
+        }
+
+        @include tablet {
+            padding: 141px 0 76px 0;
+        }
+
+        @include mobile {
+            padding: 70px 0 30px 0;
+        }
+    }
+
+    &__about-project {
+        background: $white;
+
+        @include desktop {
+            padding: 110px 0;
+        }
+
+        @include tablet {
+            padding: 90px 0;
+        }
+
+        @include mobile {
+            padding: 70px 0;
+        }
+    }
+
+    &__techs {
+        @include desktop {
+            background-color: $gray-4;
+            padding: 100px 0;
+        }
+
+        @include tablet {
+            background-color: $gray-4;
+            padding: 90px 0;
+        }
+
+        @include mobile {
+            background: $white;
+            padding: 70px 0;
+        }
+    }
+
+    &__about-me {
+        @include desktop {
+            padding: 110px 0 0 0;
+        }
+
+        @include tablet {
+            padding: 90px 0;
+        }
+
+        @include mobile {
+            padding: 70px 0 0 0;
+        }
+    }
+
+    &__portfolio {
+        @include desktop {
+            padding: 98px 0 125px 0;
+        }
+
+        @include tablet {
+            padding: 90px 0;
+        }
+
+        @include mobile {
+            padding: 70px 0;
+        }
+    }
+}

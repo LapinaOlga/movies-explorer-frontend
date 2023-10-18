@@ -1,0 +1,119 @@
+@import "../../scss/index";
+
+.techs {
+    &__title {
+        color: $black;
+        text-align: center;
+        font-family: $base-font-family;
+        font-style: normal;
+        font-weight: 400;
+
+        @include desktop {
+            font-size: 50px;
+            line-height: 58px;
+            letter-spacing: -2px;
+            margin-top: 90px;
+        }
+
+        @include tablet {
+            font-size: 50px;
+            line-height: 58px; /* 116% */
+            letter-spacing: -2px;
+            margin-top: 80px;
+        }
+
+        @include mobile {
+            font-size: 30px;
+            line-height: normal;
+            letter-spacing: -1.2px;
+            margin-top: 60px;
+        }
+    }
+
+    &__description {
+        color: $black;
+        text-align: center;
+        font-family: $base-font-family;
+        font-style: normal;
+        font-weight: 400;
+
+        @include desktop {
+            font-size: 14px;
+            line-height: 20px;
+            letter-spacing: -0.56px;
+            margin-top: 26px;
+        }
+
+        @include tablet {
+            font-size: 12px;
+            line-height: 18px; /* 150% */
+            letter-spacing: -0.48px;
+            margin-top: 22px;
+        }
+
+        @include mobile {
+            font-size: 11px;
+            line-height: 16px; /* 145.455% */
+            letter-spacing: -0.44px;
+            margin-top: 24px;
+        }
+    }
+
+    &__tags {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        width: 100%;
+
+        @include desktop {
+            flex-wrap: nowrap;
+            margin-top: 100px;
+            justify-content: center;
+        }
+
+        @include tablet {
+            flex-wrap: nowrap;
+            margin-top: 83px;
+            justify-content: center;
+        }
+
+        @include mobile {
+            flex-wrap: wrap;
+            margin: 50px auto 0 auto;
+            box-sizing: border-box;
+            justify-content: flex-start;
+            max-width: 178px;
+        }
+    }
+
+    &__tag {
+        border-radius: 10px;
+        background: $gray-7;
+        text-align: center;
+        color: $black;
+        font-family: $base-font-family;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        flex: 1 1 0;
+        padding: 21px 14px 21px 14px;
+        max-width: 90px;
+        box-sizing: border-box;
+
+        @include desktop {
+            font-size: 14px;
+            letter-spacing: -0.56px;
+        }
+
+        @include tablet {
+            font-size: 12px;
+            letter-spacing: -0.48px;
+        }
+
+        @include mobile {
+            font-size: 12px;
+            letter-spacing: -0.48px;
+            flex: 1 0 calc(50% - 10px);
+        }
+    }
+}

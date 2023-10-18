@@ -1,0 +1,145 @@
+@import "../../scss";
+
+.search-form {
+    @include desktop {
+        padding: 70px 0 49px 0;
+    }
+
+    @include tablet {
+        padding: 86px 0 62px 0;
+    }
+
+    @include mobile {
+        padding: 98px 0 51px 0;
+    }
+
+    &__line {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 18px;
+    }
+
+    &__icon {
+        width: 34px;
+        height: 34px;
+
+        @include mobile {
+            display: none;
+        }
+    }
+
+    &__input {
+        font-feature-settings: 'clig' off, 'liga' off;
+        font-family: $base-font-family;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        border: none;
+        outline: none;
+        flex-grow: 1;
+
+        &:hover {
+            outline: none;
+            border: none;
+        }
+
+        &::placeholder {
+            color: $gray-8;
+        }
+
+        @include desktop {
+            text-align: center;
+            font-size: 28px;
+        }
+
+        @include tablet {
+            text-align: center;
+            font-size: 28px;
+        }
+
+        @include mobile {
+            text-align: left;
+            font-size: 18px;
+        }
+    }
+
+    &__button {
+        border: none;
+        background: none;
+        padding: 0;
+    }
+
+    &__divider {
+        background-color: $gray-7;
+        height: 1px;
+
+        @include desktop {
+            margin-top: 15px;
+        }
+
+        @include tablet {
+            margin-top: 15px;
+        }
+
+        @include mobile {
+            margin-top: 9px;
+        }
+    }
+
+    &__filters {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+
+        @include desktop {
+            margin-top: 29px;
+        }
+
+        @include tablet {
+            margin-top: 29px;
+        }
+
+        @include mobile {
+            margin-top: 42px;
+        }
+    }
+
+    &__filter {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 13px;
+    }
+
+    &__switch {
+        width: 36px;
+        height: 20px;
+        background-color: $gray-6;
+        border-radius: 10px;
+        padding: 6px 0 0 6px;
+        box-sizing: border-box;
+
+        &:after {
+            content: '';
+            display: block;
+            width: 8px;
+            height: 8px;
+            background-color: $white;
+            opacity: 0.8;
+            border-radius: 50%;
+        }
+
+        &--active {
+            background-color: $green;
+            padding-left: 22px;
+
+            &:after {
+                content: '';
+                opacity: 1;
+            }
+        }
+    }
+}

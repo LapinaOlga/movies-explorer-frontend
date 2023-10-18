@@ -1,0 +1,54 @@
+@import "../../scss";
+
+.profile-button {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    //justify-content: flex-end;
+    gap: 18px;
+
+    &--white {
+
+    }
+
+    &__label {
+        //font-family: $base-font-family;
+        //font-size: 12px;
+        //font-style: normal;
+        //font-weight: 500;
+        //line-height: 16px;
+        //border: none;
+        //color: #FFF;
+        font-family: $base-font-family;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 16px; /* 114.286% */
+        padding: 8px 0;
+    }
+
+    &__icon {
+        border-radius: 4px;
+        width: 26px;
+        align-content: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &--white &__label {
+        color: $white;
+    }
+
+    &--white &__icon {
+        background-color: $green;
+    }
+
+    &--black &__label {
+        color: $black;
+    }
+
+    &--black &__icon {
+        background-color: $gray-3;
+    }
+}

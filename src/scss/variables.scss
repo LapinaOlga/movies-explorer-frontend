@@ -1,0 +1,23 @@
+$primary: #465DFF;
+$white: #fff;
+$black: #000;
+$green: #2BE080;
+$gray-1: #FDFDFD;
+$gray-2: #FAFAFA;
+$gray-3: #F9F9F9;
+$gray-4: #F5F5F5;
+$gray-5: #F2F2F2;
+$gray-6: #EBEBEB;
+$gray-7: #E8E8E8;
+$gray-8: #A0A0A0;
+$red: #EE3465;
+$orange: #FF6838;
+
+$breakpoints: (
+    mobile: 320px,
+    tablet: 768px,
+    desktop: 1140px
+);
+
+$sidebar-background-background: rgba(0, 0, 0, 0.3);
+$base-font-family: Inter, Helvetica, sans-serif;
