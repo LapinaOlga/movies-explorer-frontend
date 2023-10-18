@@ -2,13 +2,17 @@ import FieldList from "../FieldList/FieldList";
 import Field from "../Field/Field";
 import Button from "../Button/Button";
 import Sign from "../Sign/Sign";
-import {useState} from "react";
+import {useContext, useEffect, useState} from "react";
+import {CurrentUserContext} from "../../contexts/CurrentUserContext";
+import {useNavigate} from "react-router-dom";
 
 export default function Login(props) {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const currentUser = useContext(CurrentUserContext);
+  const navigate = useNavigate();
 
   const handleSubmitForm = (e) => {
     e.preventDefault();
@@ -21,6 +25,12 @@ export default function Login(props) {
       })
     }
   }
+
+  useEffect(() => {
+    if (currentUser) {
+      navigate('/')
+    }
+  }, [currentUser])
 
   return (
     <form onSubmit={handleSubmitForm}>

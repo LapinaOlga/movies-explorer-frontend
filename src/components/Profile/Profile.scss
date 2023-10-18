@@ -2,6 +2,7 @@
 
 .profile {
     @include desktop {
+        height: calc(100vh - $header-height - 74px - 70px);
         padding: 74px 0 70px 0;
     }
 
@@ -13,8 +14,15 @@
         padding: 70px 0 40px 0;
     }
 
+    &__container {
+        height: 100%;
+    }
+
     &__content {
         margin: 0 auto;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
 
         @include desktop {
             width: 410px;
@@ -42,6 +50,9 @@
     &__fields {
         display: flex;
         flex-direction: column;
+        align-items: stretch;
+        flex-grow: 1;
+        justify-content: flex-start;
 
         @include desktop {
             margin-top: 123px;
@@ -93,10 +104,6 @@
         display: flex;
         flex-direction: column;
         gap: 16px;
-
-        @include desktop {
-            margin-top: 220px;
-        }
 
         @include tablet {
             margin-top: 210px;

@@ -1,7 +1,7 @@
 @import "../../scss/index";
 
 .footer {
-    padding-top: 55px;
+    padding-top: 79px;
     padding-bottom: 20px;
 
     @include desktop {
@@ -14,6 +14,14 @@
 
     @include mobile {
         background-color: $white;
+        padding-top: 56px;
+    }
+
+    &__container {
+        @include tablet {
+            max-width: calc(100vw - 30px * 2);
+            margin: 0 30px;
+        }
     }
 
     &__description {

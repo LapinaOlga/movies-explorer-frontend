@@ -7,7 +7,7 @@ export default function Techs() {
       <SectionHeader>Технологии</SectionHeader>
       <div className="techs__title">7 технологий</div>
       <div className="techs__description">
-        На курсе веб-разработки мы освоили технологии, которые применили <br/> в дипломном проекте.
+        На курсе веб-разработки мы освоили технологии, которые применили в дипломном проекте.
       </div>
       <div className="techs__tags">
         <div className="techs__tag">HTML</div>

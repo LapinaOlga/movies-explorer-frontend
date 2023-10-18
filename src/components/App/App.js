@@ -9,9 +9,11 @@ import Register from "../Register/Register";
 import Login from "../Login/Login";
 import Api from "../../utils/api";
 import {useEffect, useState} from "react";
+import NotFound from "../NotFound/NotFound";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
   const handleLogin = ({email, password}, onError) => {
@@ -38,13 +40,17 @@ function App() {
   }
 
   const loadInfoAboutCurrentUser = () => {
+    setIsLoading(true);
     Api.getCurrentUser()
       .then((response) => {
         setCurrentUser(response.data);
       })
       .catch((error) => {
-        console.error(error.message);
+        alert(error.message);
         handleLogout();
+      })
+      .finally(() => {
+        setIsLoading(false);
       })
   }
 
@@ -63,9 +69,16 @@ function App() {
     if (token) {
       Api.setToken(token);
       loadInfoAboutCurrentUser();
+    } else {
+      setIsLoading(false);
     }
   }, [])
 
+  if (isLoading) {
+    return (
+      <div>Loading...</div>
+    );
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -96,6 +109,9 @@ function App() {
               onLogout={handleLogout}
             />
           </ProtectedRoute>
+        }/>
+        <Route path="*" element={
+          <NotFound />
         }/>
       </Routes>
     </CurrentUserContext.Provider>

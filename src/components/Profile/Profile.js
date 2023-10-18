@@ -23,7 +23,7 @@ export default function Profile(props) {
     <>
       <Header/>
       <main className="profile">
-        <Container>
+        <Container className="profile__container">
           <div className="profile__content">
             <div className="profile__title">Привет, {currentUser.name}!</div>
             <div className="profile__fields">

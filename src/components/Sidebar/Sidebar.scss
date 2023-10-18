@@ -46,9 +46,6 @@
     }
 
     &__body {
-        //display: flex;
-        //flex-direction: column;
-        //gap: 24px;
         flex-grow: 1;
 
         @include tablet {
@@ -78,35 +75,6 @@
     &__cross {
         width: 22px;
     }
-
-    //flex-direction: row;
-    //gap: 18px;
-    //
-    //@include desktop {
-    //    display: flex;
-    //}
-    //
-    //@include tablet {
-    //    display: flex;
-    //}
-    //
-    //@include mobile {
-    //    display: none;
-    //}
-    //
-    //&__button {
-    //    @include desktop {
-    //        display: none;
-    //    }
-    //
-    //    @include tablet {
-    //        display: none;
-    //    }
-    //
-    //    @include mobile {
-    //        display: block;
-    //    }
-    //}
 
     &__footer {
         @include tablet {

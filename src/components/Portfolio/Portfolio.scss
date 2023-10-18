@@ -31,16 +31,15 @@
         }
 
         @include tablet {
-            margin-top: 50px;
+            margin-top: 34px;
         }
 
         @include mobile {
-            margin-top: 40px;
+            margin-top: 20px;
         }
     }
 
     &__achievement {
-        padding: 10px 0 19px 0;
         display: flex;
         flex-direction: row;
         flex-wrap: nowrap;
@@ -49,6 +48,18 @@
 
         & + & {
             border-top: 1px solid $gray-7;
+        }
+
+        @include desktop {
+            padding: 10px 0 19px 0;
+        }
+
+        @include tablet {
+            padding: 10px 0 19px 0;
+        }
+
+        @include mobile {
+            padding: 20px 0;
         }
     }
 

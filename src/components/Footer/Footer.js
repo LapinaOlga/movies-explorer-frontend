@@ -7,7 +7,7 @@ export default function Footer() {
 
   return (
     <footer className="footer">
-      <Container>
+      <Container className="footer__container">
         <div className="footer__description">
           Учебный проект Яндекс.Практикум х BeatFilm.
         </div>

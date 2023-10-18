@@ -5,6 +5,7 @@
     flex-wrap: nowrap;
 
     @include desktop {
+        gap: 150px;
         flex-direction: row;
     }
 
@@ -28,8 +29,7 @@
         }
 
         @include tablet {
-            //margin-top: 141px;
-            height: 310px;
+            height: 304px;
         }
 
         @include mobile {
@@ -77,6 +77,7 @@
 
         @include desktop {
             margin-top: 36px;
+            max-width: 50%;
         }
 
         @include tablet {
@@ -86,7 +87,8 @@
         }
 
         @include mobile {
-            margin-top: 24px;
+            margin: 24px auto 0 auto;
+            width: 90%;
             text-align: center;
         }
     }

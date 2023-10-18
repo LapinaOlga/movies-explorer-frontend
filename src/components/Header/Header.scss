@@ -1,7 +1,7 @@
 @import "../../scss/index";
 
 .header {
-    height: 74px;
+    height: $header-height;
     padding: 18px 0;
     box-sizing: border-box;
     background-color: $white;
@@ -15,6 +15,11 @@
     &__container {
         display: flex;
         flex-wrap: nowrap;
+
+        @include tablet {
+            max-width: calc(100vw - 30px * 2);
+            margin: 0 30px;
+        }
     }
 
     &__left {
@@ -53,31 +58,6 @@
             display: block;
         }
     }
-
-    //&__label {
-    //    font-family: $base-font-family;
-    //    font-size: 12px;
-    //    font-style: normal;
-    //    font-weight: 500;
-    //    line-height: 16px;
-    //    border: none;
-    //}
-
-    //&__account {
-    //    display: flex;
-    //    flex-direction: row;
-    //    align-items: center;
-    //    justify-content: flex-end;
-    //    gap: 18px;
-    //
-    //    @include tablet {
-    //        display: none;
-    //    }
-    //
-    //    @include mobile {
-    //        display: none;
-    //    }
-    //}
 
     &__sandwitch {
         padding: 0;

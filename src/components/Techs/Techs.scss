@@ -36,12 +36,14 @@
         font-family: $base-font-family;
         font-style: normal;
         font-weight: 400;
+        margin: 0 auto;
 
         @include desktop {
             font-size: 14px;
             line-height: 20px;
             letter-spacing: -0.56px;
             margin-top: 26px;
+            width: 40%;
         }
 
         @include tablet {
@@ -49,6 +51,7 @@
             line-height: 18px; /* 150% */
             letter-spacing: -0.48px;
             margin-top: 22px;
+            width: 65%;
         }
 
         @include mobile {

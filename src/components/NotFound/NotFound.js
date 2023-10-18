@@ -15,7 +15,7 @@ export default function NotFound() {
             </div>
           </div>
           <div className="not-found__row not-found__row--end">
-            <Button variant="link-orange">Назад</Button>
+            <Button to="/" variant="link-orange">Назад</Button>
           </div>
         </div>
       </Container>

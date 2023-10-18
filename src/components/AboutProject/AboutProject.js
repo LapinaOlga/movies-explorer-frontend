@@ -27,19 +27,27 @@ export default function AboutProject() {
       <div className="about-project__footer">
         <div className="about-project__chart">
           <div className="about-project__bar">
-            <div className="about-project__progress about-project__progress--be">
-              1 неделя
+            <div className="about-project__back-end">
+              <div className="about-project__progress about-project__progress--green">
+                1 неделя
+              </div>
             </div>
-            <div className="about-project__progress about-project__progress--fe">
-              4 недели
+            <div className="about-project__front-end">
+              <div className="about-project__progress about-project__progress--gray-5">
+                4 недели
+              </div>
             </div>
           </div>
           <div className="about-project__bar">
-            <div className="about-project__legend about-project__legend--be">
-              Back-end
+            <div className="about-project__back-end">
+              <div className="about-project__legend">
+                Back-end
+              </div>
             </div>
-            <div className="about-project__legend about-project__legend--fe">
-              Front-end
+            <div className="about-project__front-end">
+              <div className="about-project__legend">
+                Front-end
+              </div>
             </div>
           </div>
         </div>
