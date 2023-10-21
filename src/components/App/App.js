@@ -65,14 +65,15 @@ function App() {
   }
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-
-    if (token) {
-      Api.setToken(token);
+    // Временно отключено для проверки верстки
+    // const token = localStorage.getItem('token');
+    //
+    // if (token) {
+    //   Api.setToken(token);
       loadInfoAboutCurrentUser();
-    } else {
-      setIsLoading(false);
-    }
+    // } else {
+    //   setIsLoading(false);
+    // }
   }, [])
 
   if (isLoading) {
