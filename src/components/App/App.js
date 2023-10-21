@@ -10,6 +10,7 @@ import Login from "../Login/Login";
 import Api from "../../utils/api";
 import {useEffect, useState} from "react";
 import NotFound from "../NotFound/NotFound";
+import EditProfile from "../EditProfile/EditProfile";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -55,7 +56,7 @@ function App() {
   }
 
   const handleEditProfile = () => {
-    console.log('show edit profile page');
+    console.log('save user info');
   }
 
   const handleLogout = () => {
@@ -104,10 +105,12 @@ function App() {
         }/>
         <Route path="/profile" element={
           <ProtectedRoute currentUser={currentUser}>
-            <Profile
-              onEdit={handleEditProfile}
-              onLogout={handleLogout}
-            />
+            <Profile onLogout={handleLogout}/>
+          </ProtectedRoute>
+        }/>
+        <Route path="/profile/edit" element={
+          <ProtectedRoute currentUser={currentUser}>
+            <EditProfile onSubmit={handleEditProfile}/>
           </ProtectedRoute>
         }/>
         <Route path="*" element={

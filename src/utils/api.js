@@ -20,11 +20,9 @@ class Api {
     // Временный костыль для проверки верстки
     return Promise.resolve({
       data: {
-        "data": {
-          "_id": "652d98e39b20be364f6671b9",
-          "email": "pochta@yandex.ru",
-          "name": "Виталий"
-        }
+        "_id": "652d98e39b20be364f6671b9",
+        "email": "pochta@yandex.ru",
+        "name": "Виталий"
       }
     })
     // return this._request('GET', '/users/me');

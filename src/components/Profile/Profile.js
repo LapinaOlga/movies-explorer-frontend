@@ -2,22 +2,23 @@ import './Profile.scss'
 import Container from "../Container/Container";
 import Button from "../Button/Button";
 import Header from "../Header/Header";
-import {useContext} from "react";
+import {useContext, useState} from "react";
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
+import {useNavigate} from "react-router-dom";
 
 export default function Profile(props) {
   const currentUser = useContext(CurrentUserContext);
-  const handleEdit = () => {
-    if (props.onEdit) {
-      props.onEdit()
-    }
+  const navigate = useNavigate();
+
+  const handleEditClick = () => {
+    navigate('/profile/edit')
   }
+
   const handleLogout = () => {
     if (props.onLogout) {
       props.onLogout()
     }
   }
-
 
   return (
     <>
@@ -38,7 +39,7 @@ export default function Profile(props) {
               </div>
             </div>
             <div className="profile__buttons">
-              <Button variant="link-black" onClick={handleEdit}>
+              <Button variant="link-black" onClick={handleEditClick}>
                 Редактировать
               </Button>
               <Button variant="link-red" onClick={handleLogout}>
