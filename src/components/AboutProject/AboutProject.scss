@@ -1,0 +1,203 @@
+@import "../../scss/index";
+
+.about-project {
+    &__report {
+        display: flex;
+
+        @include desktop {
+            flex-direction: row;
+            margin-top: 70px;
+            gap: 40px;
+        }
+
+        @include tablet {
+            flex-direction: row;
+            margin-top: 70px;
+            gap: 30px;
+        }
+
+        @include mobile {
+            flex-direction: column;
+            gap: 56px;
+            margin-top: 60px;
+        }
+    }
+
+    &__index {
+        @include desktop {
+            width: 50%;
+        }
+
+        @include tablet {
+            width: 50%;
+        }
+
+        @include mobile {
+            width: 100%;
+        }
+    }
+
+    &__title {
+        color: $black;
+        font-family: $base-font-family;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+
+        @include desktop {
+            font-size: 20px;
+            letter-spacing: -0.8px;
+        }
+
+        @include tablet {
+            font-size: 20px;
+            letter-spacing: -0.8px;
+        }
+
+        @include mobile {
+            font-size: 18px;
+            letter-spacing: -0.72px;
+        }
+    }
+
+    &__description {
+        color: $black;
+        font-family: $base-font-family;
+        font-style: normal;
+        font-weight: 400;
+
+        @include desktop {
+            font-size: 14px;
+            line-height: 20px; /* 142.857% */
+            margin-top: 26px;
+        }
+
+        @include tablet {
+            font-size: 12px;
+            line-height: 18px; /* 150% */
+            margin-top: 22px;
+        }
+
+        @include mobile {
+            font-size: 11px;
+            line-height: 16px; /* 145.455% */
+            margin-top: 16px;
+            margin-top: 16px;
+        }
+    }
+
+    &__footer {
+        @include desktop {
+            margin-top: 110px;
+        }
+
+        @include tablet {
+            margin-top: 93px;
+        }
+
+        @include mobile {
+            margin-top: 60px;
+        }
+    }
+
+    &__chart {
+        display: flex;
+        flex-direction: column;
+
+        @include desktop {
+            row-gap: 14px;
+        }
+
+        @include tablet {
+            row-gap: 14px;
+        }
+
+        @include mobile {
+            row-gap: 10px;
+        }
+    }
+
+    &__bar {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+    }
+
+    &__back-end {
+        width: 20%;
+        min-width: 100px;
+        display: flex;
+        flex-direction: row;
+    }
+
+    &__front-end {
+        width: 80%;
+        display: flex;
+        flex-direction: row;
+    }
+
+    &__progress {
+        color: $black;
+        font-family: $base-font-family;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+
+        &--green {
+            background-color: $green;
+        }
+
+        &--gray-5 {
+            background-color: $gray-5;
+        }
+
+        @include desktop {
+            font-size: 14px;
+            padding: 9px 14px;
+        }
+
+        @include tablet {
+            text-align: center;
+            font-size: 14px;
+            padding: 9px 10px;
+        }
+
+        @include mobile {
+            text-align: center;
+            font-size: 11px;
+            padding: 11px 10px;
+        }
+    }
+
+    &__legend {
+        color: $gray-8;
+        text-align: center;
+        font-family: $base-font-family;
+        font-style: normal;
+        width: 100%;
+        box-sizing: content-box;
+
+        @include desktop {
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 17px; /* 121.429% */
+        }
+
+        @include tablet {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 17px; /* 121.429% */
+        }
+
+        @include mobile {
+            font-size: 11px;
+            font-weight: 400;
+            line-height: normal;
+        }
+    }
+}

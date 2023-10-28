@@ -1,0 +1,76 @@
+@import "../../scss";
+
+.switch {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    @include desktop {
+        gap: 12px;
+    }
+
+    @include tablet {
+        gap: 12px;
+    }
+
+    @include mobile {
+        gap: 13px;
+    }
+
+    &__fake {
+        width: 36px;
+        height: 20px;
+        background-color: $gray-6;
+        border-radius: 10px;
+        padding: 6px 0 0 6px;
+        box-sizing: border-box;
+
+        &:after {
+            content: '';
+            display: block;
+            width: 8px;
+            height: 8px;
+            background-color: $white;
+            opacity: 0.8;
+            border-radius: 50%;
+        }
+    }
+
+    &--active &__fake {
+        background-color: $green;
+        padding-left: 22px;
+        transition: right 500ms ease,
+        background-color 500ms ease,
+        box-shadow 500ms ease;
+
+        &:after {
+            content: '';
+            opacity: 1;
+        }
+    }
+
+    &__input {
+        display: none;
+    }
+
+    &__label {
+        color: $black;
+        font-family: $base-font-family;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 18px; /* 128.571% */
+
+        @include desktop {
+            font-size: 14px;
+        }
+
+        @include tablet {
+            font-size: 14px;
+        }
+
+        @include mobile {
+            font-size: 11px;
+        }
+    }
+}

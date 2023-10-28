@@ -1,0 +1,93 @@
+@import "../../scss/index";
+
+.button {
+    font-family: $base-font-family;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 16px;
+    padding: 8px 20px;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+
+    &:hover {
+        cursor: pointer;
+        opacity: 0.8;
+    }
+
+    &--compact {
+        padding-left: 7.25px;
+        padding-right: 7.25px;
+    }
+
+    &--green {
+        border-radius: 3px;
+        background: $green;
+        color: $black;
+    }
+
+    &--transparent {
+        background: transparent;
+        color: $white;
+    }
+
+    &--outline-white {
+        border-radius: 3px;
+        border: 1px solid $white;
+        background: transparent;
+        color: $white;
+        padding: 10px 20px;
+    }
+
+    &--gray-3 {
+        border-radius: 6px;
+        background: #F9F9F9;
+        color: $black;
+        line-height: normal;
+        padding: 11px 0;
+    }
+
+    &--link {
+        &-black {
+            color: $black;
+            font-weight: 400;
+            line-height: normal;
+            padding: 0;
+            background: none;
+        }
+
+        &-red {
+            color: $red;
+            font-weight: 500;
+            line-height: normal;
+            padding: 0;
+            background: none;
+        }
+
+        &-orange {
+            color: $orange;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: normal;
+            padding: 0;
+            background: none;
+        }
+
+        &-gray {
+            color: $gray-8;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: normal;
+            padding: 0;
+            background: none;
+        }
+    }
+
+    &--orange {
+        border-radius: 3px;
+        background: $orange;
+        padding: 15px;
+        color: $white;
+    }
+}

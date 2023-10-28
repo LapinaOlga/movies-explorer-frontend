@@ -1,0 +1,74 @@
+@import "../../scss";
+
+.movie-card {
+    background: $gray-1;
+    box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+
+    &__header {
+        padding: 14px;
+        display: flex;
+        flex-direction: row;
+        gap: 14px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__left {
+        display: flex;
+        flex-direction: column;
+        gap: 9px;
+        flex-grow: 1;
+    }
+
+    &__title {
+        color: $black;
+        font-family: $base-font-family;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        word-break: keep-all;
+        text-overflow: ellipsis;
+    }
+
+    &__time {
+        color: #A0A0A0;
+        font-family: $base-font-family;
+        font-size: 11px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    &__button {
+        width: 30px;
+        height: 30px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        border: none;
+
+        &--green {
+            background-color: $green;
+        }
+
+        &--gray {
+            background-color: $gray-3;
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    &__image {
+        max-height: 203px;
+        min-height: 203px;
+        object-fit: cover;
+        aspect-ratio: 1;
+    }
+}

@@ -1,0 +1,111 @@
+@import "../../scss";
+
+.sign {
+    &__content {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+
+        @include desktop {
+            width: 396px;
+            margin: 70px auto;
+            height: calc(100vh - 70px * 2);
+            justify-content: flex-start;
+        }
+
+        @include tablet {
+            width: 396px;
+            margin: 232px auto;
+            height: calc(100vh - 232px * 2);
+            justify-content: center;
+        }
+
+        @include mobile {
+            width: 260px;
+            margin: 56px auto 30px auto;
+            height: calc(100vh - 30px - 56px);
+        }
+    }
+
+    &__logo {
+        @include desktop {
+            text-align: left;
+        }
+
+        @include tablet {
+            text-align: left;
+        }
+
+        @include mobile {
+            text-align: center;
+        }
+    }
+
+    &__title {
+        color: $black;
+        font-family: $base-font-family;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+
+        @include desktop {
+            text-align: left;
+            margin-top: 40px;
+        }
+
+        @include tablet {
+            text-align: left;
+            margin-top: 40px;
+        }
+
+        @include mobile {
+            text-align: center;
+            margin-top: 50px;
+        }
+    }
+
+    &__body {
+        margin-top: 40px;
+
+        @include desktop {
+            flex-grow: 1;
+        }
+
+        @include mobile {
+            flex-grow: 1;
+        }
+    }
+
+    &__footer {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        @include tablet {
+            margin-top: 69px;
+        }
+
+        @include mobile {
+            margin-top: 20px;
+        }
+    }
+
+    &__links {
+        display: flex;
+        flex-direction: row;
+        gap: 6px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__question {
+        color: $gray-8;
+        text-align: center;
+        font-family: $base-font-family;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+}

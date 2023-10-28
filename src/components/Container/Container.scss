@@ -1,0 +1,21 @@
+@use "sass:math";
+@import "../../scss/index";
+
+.container {
+    width: 100%;
+    margin: 0 auto;
+
+    @include desktop {
+        max-width: 1140px;
+        box-sizing: content-box;
+    }
+
+    @include tablet {
+        max-width: 668px;
+    }
+
+    @include mobile {
+        max-width: 292px;
+        box-sizing: border-box;
+    }
+}

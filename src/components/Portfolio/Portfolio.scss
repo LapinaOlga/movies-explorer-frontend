@@ -1,0 +1,123 @@
+@import "../../scss/index";
+
+.portfolio {
+    &__hint {
+        color: $gray-8;
+        font-feature-settings: 'clig' off, 'liga' off;
+        font-family: $base-font-family;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 20px;
+
+        @include desktop {
+            font-size: 18px;
+        }
+
+        @include tablet {
+            font-size: 18px;
+        }
+
+        @include mobile {
+            font-size: 14px;
+        }
+    }
+
+    &__achievements {
+        display: flex;
+        flex-direction: column;
+
+        @include desktop {
+            margin-top: 34px;
+        }
+
+        @include tablet {
+            margin-top: 34px;
+        }
+
+        @include mobile {
+            margin-top: 20px;
+        }
+    }
+
+    &__achievement {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: flex-start;
+
+        & + & {
+            border-top: 1px solid $gray-7;
+        }
+
+        @include desktop {
+            padding: 10px 0 19px 0;
+        }
+
+        @include tablet {
+            padding: 10px 0 19px 0;
+        }
+
+        @include mobile {
+            padding: 20px 0;
+        }
+    }
+
+    &__title {
+        color: $black;
+        font-family: $base-font-family;
+        font-style: normal;
+        font-weight: 400;
+        flex-grow: 1;
+
+        @include desktop {
+            font-size: 30px;
+            line-height: 50px; /* 166.667% */
+            letter-spacing: -1.2px;
+        }
+
+        @include tablet {
+            font-size: 28px;
+            line-height: 50px; /* 178.571% */
+            letter-spacing: -1.12px;
+        }
+
+        @include mobile {
+            font-size: 18px;
+            line-height: 28px; /* 155.556% */
+            letter-spacing: -0.72px;
+        }
+    }
+
+    &__icon {
+        color: $black;
+        font-family: $base-font-family;
+        line-height: 60px; /* 200% */
+        letter-spacing: -1.2px;
+
+        @include desktop {
+            font-size: 30px;
+            line-height: 60px; /* 200% */
+            letter-spacing: -1.2px;
+        }
+
+        @include tablet {
+            font-size: 28px;
+            line-height: 60px; /* 214.286% */
+            letter-spacing: -1.12px;
+        }
+
+        @include mobile {
+            font-size: 18px;
+            line-height: 28px; /* 155.556% */
+            letter-spacing: -0.72px;
+        }
+
+        @at-root a#{&} {
+            text-decoration: none;
+            &:hover {
+                opacity: 0.7;
+            }
+        }
+    }
+}

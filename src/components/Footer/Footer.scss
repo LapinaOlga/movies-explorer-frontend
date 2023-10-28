@@ -1,0 +1,169 @@
+@import "../../scss/index";
+
+.footer {
+    padding-top: 79px;
+    padding-bottom: 20px;
+
+    @include desktop {
+        background-color: $gray-2;
+    }
+
+    @include tablet {
+        background-color: $gray-2;
+    }
+
+    @include mobile {
+        background-color: $white;
+        padding-top: 56px;
+    }
+
+    &__container {
+        @include tablet {
+            max-width: calc(100vw - 30px * 2);
+            margin: 0 30px;
+        }
+    }
+
+    &__description {
+        color: $gray-8;
+        text-align: center;
+        font-feature-settings: 'clig' off, 'liga' off;
+        font-family: $base-font-family;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+
+        @include desktop {
+            font-size: 13px;
+        }
+
+        @include tablet {
+            font-size: 13px;
+        }
+
+        @include mobile {
+            font-size: 12px;
+        }
+    }
+
+    &__divider {
+        background: $gray-7;
+        height: 1px;
+
+        @include desktop {
+            margin: 20px 0;
+        }
+
+        @include tablet {
+            margin: 20px 0;
+        }
+
+        @include mobile {
+            margin: 21px 0 30px;
+        }
+    }
+
+    &__services {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: center;
+
+        @include desktop {
+            flex-direction: row;
+        }
+
+        @include tablet {
+            flex-direction: row;
+        }
+
+        @include mobile {
+            flex-direction: column-reverse;
+            gap: 30px;
+        }
+    }
+
+    &__left {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        font-feature-settings: 'clig' off, 'liga' off;
+        font-family: $base-font-family;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+
+        @include desktop {
+            flex-direction: row;
+            color: $black;
+            font-size: 13px;
+        }
+
+        @include tablet {
+            flex-direction: row;
+            color: $black;
+            font-size: 13px;
+        }
+
+        @include mobile {
+            color: $gray-8;
+            font-size: 12px;
+        }
+    }
+
+    &__right {
+        color: $black;
+        display: flex;
+        align-items: center;
+        flex-grow: 1;
+
+        @include desktop {
+            flex-direction: row;
+            justify-content: flex-end;
+            gap: 20px;
+        }
+
+        @include tablet {
+            flex-direction: row;
+            justify-content: flex-end;
+            gap: 20px;
+        }
+
+        @include mobile {
+            flex-direction: column;
+            justify-content: center;
+            gap: 12px;
+        }
+    }
+
+    &__item {
+        color: $black;
+        font-feature-settings: 'clig' off, 'liga' off;
+        font-family: $base-font-family;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+
+        @include desktop {
+            font-size: 13px;
+        }
+
+        @include tablet {
+            font-size: 13px;
+        }
+
+        @include mobile {
+            font-size: 12px;
+        }
+
+        // Для тегов a с этим классом убираем подчеркивание
+        @at-root a#{&} {
+            text-decoration: none;
+
+            &:hover {
+                opacity: 0.7;
+            }
+        }
+    }
+}

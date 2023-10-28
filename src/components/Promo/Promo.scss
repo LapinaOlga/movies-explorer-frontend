@@ -1,0 +1,116 @@
+@import "../../scss/index";
+
+.promo {
+    display: flex;
+    flex-wrap: nowrap;
+
+    @include desktop {
+        gap: 150px;
+        flex-direction: row;
+    }
+
+    @include tablet {
+        flex-direction: column-reverse;
+        align-items: center;
+        justify-content: center;
+        gap: 48px;
+    }
+
+    @include mobile {
+        flex-direction: column-reverse;
+        align-items: center;
+        justify-content: center;
+        gap: 44px;
+    }
+
+    &__globe {
+        @include desktop {
+            height: 300px;
+        }
+
+        @include tablet {
+            height: 304px;
+        }
+
+        @include mobile {
+            height: 206px;
+        }
+    }
+
+    &__title {
+        color: $white;
+        font-feature-settings: 'clig' off, 'liga' off;
+        font-family: $base-font-family;
+        font-size: 50px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 58px;
+
+        @include desktop {
+
+        }
+
+        @include tablet {
+            text-align: center;
+            font-size: 40px;
+            line-height: 50px; /* 125% */
+        }
+
+        @include mobile {
+            text-align: center;
+            font-size: 30px;
+            font-weight: 400;
+            line-height: 38px;
+            letter-spacing: -1.2px;
+        }
+    }
+
+    &__hint {
+        color: $white;
+        font-feature-settings: 'clig' off, 'liga' off;
+        font-family: $base-font-family;
+        font-size: 13px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        opacity: 0.5;
+
+        @include desktop {
+            margin-top: 36px;
+            max-width: 50%;
+        }
+
+        @include tablet {
+            text-align: center;
+            width: 260px;
+            margin: 22px auto 0 auto;
+        }
+
+        @include mobile {
+            margin: 24px auto 0 auto;
+            width: 90%;
+            text-align: center;
+        }
+    }
+
+    &__action {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        @include desktop {
+            margin-top: 146px;
+            justify-content: flex-start;
+        }
+
+        @include tablet {
+            margin-top: 92px;
+            justify-content: center;
+        }
+
+        @include mobile {
+            margin-top: 80px;
+            justify-content: center;
+        }
+    }
+}

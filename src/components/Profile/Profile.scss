@@ -1,0 +1,116 @@
+@import "../../scss";
+
+.profile {
+    @include desktop {
+        height: calc(100vh - $header-height - 74px - 70px);
+        padding: 74px 0 70px 0;
+    }
+
+    @include tablet {
+        padding: 236px 0 269px 0;
+    }
+
+    @include mobile {
+        padding: 70px 0 40px 0;
+    }
+
+    &__container {
+        height: 100%;
+    }
+
+    &__content {
+        margin: 0 auto;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+
+        @include desktop {
+            width: 410px;
+        }
+
+        @include tablet {
+            width: 410px;
+        }
+
+        @include mobile {
+            width: 260px;
+        }
+    }
+
+    &__title {
+        color: $black;
+        text-align: center;
+        font-family: $base-font-family;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+    }
+
+    &__fields {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        flex-grow: 1;
+        justify-content: flex-start;
+
+        @include desktop {
+            margin-top: 123px;
+        }
+
+        @include tablet {
+            margin-top: 96px;
+        }
+
+        @include mobile {
+            margin-top: 80px;
+        }
+    }
+
+    &__field {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+    }
+
+    &__divider {
+        height: 1px;
+        background-color: $gray-7;
+        margin: 16px 0 17px 0;
+    }
+
+    &__label {
+        color: $black;
+        font-family: $base-font-family;
+        font-size: 11px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+    }
+
+    &__value {
+        color: $black;
+        text-align: right;
+        font-family: $base-font-family;
+        font-size: 11px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        flex-grow: 1;
+    }
+
+    &__buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        @include tablet {
+            margin-top: 210px;
+        }
+
+        @include mobile {
+            margin-top: 379px;
+        }
+    }
+}
