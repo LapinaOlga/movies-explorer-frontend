@@ -19,10 +19,12 @@ export default function InputWithValidation(props) {
   }
 
   const handleBlur = (e) => {
-    const isValid = e.target.checkValidity();
+    if (isRealTimeValidation) {
+      const isValid = e.target.checkValidity();
 
-    if (isValid) {
-      hideValidationError()
+      if (isValid) {
+        hideValidationError()
+      }
     }
 
     if (typeof props.onBlur === 'function') {
@@ -31,10 +33,12 @@ export default function InputWithValidation(props) {
   }
 
   const handleInput = (e) => {
-    const isValid = e.target.checkValidity();
+    if (isRealTimeValidation) {
+      const isValid = e.target.checkValidity();
 
-    if (isValid) {
-      hideValidationError()
+      if (isValid) {
+        hideValidationError()
+      }
     }
 
     if (typeof props.onInput === 'function') {
@@ -43,7 +47,9 @@ export default function InputWithValidation(props) {
   }
 
   const handleChange = (e) => {
-    e.target.checkValidity()
+    if (isRealTimeValidation) {
+      e.target.checkValidity()
+    }
 
     if (typeof props.onChange === 'function') {
       props.onChange(e);
