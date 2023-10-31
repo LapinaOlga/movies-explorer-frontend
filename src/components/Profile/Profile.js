@@ -15,7 +15,7 @@ export default function Profile(props) {
   }
 
   const handleLogout = () => {
-    if (props.onLogout) {
+    if (typeof props.onLogout === 'function') {
       props.onLogout()
     }
   }

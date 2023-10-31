@@ -89,5 +89,12 @@
         background: $orange;
         padding: 15px;
         color: $white;
+
+        &:disabled {
+            background: $gray-3;
+            color: $gray-8;
+            cursor: default;
+            opacity: 1;
+        }
     }
 }

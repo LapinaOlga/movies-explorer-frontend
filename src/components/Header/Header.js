@@ -70,10 +70,10 @@ export default function Header(props) {
           }
           {!currentUser &&
             <>
-              <Button variant="transparent" to="/sign-up">
+              <Button variant="transparent" to="/signup">
                 Регистрация
               </Button>
-              <Button variant="green" to="/sign-in">
+              <Button variant="green" to="/signin">
                 Войти
               </Button>
             </>

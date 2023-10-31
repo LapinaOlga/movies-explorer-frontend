@@ -1,5 +1,6 @@
 import './Field.scss'
 import {useEffect, useState} from "react";
+import InputWithValidation from "../InputWithValidation/InputWithValidation";
 
 export default function Field(props) {
   const [feedback, setFeedback] = useState(props.feedback)
@@ -14,33 +15,52 @@ export default function Field(props) {
     setFeedback(props.feedback);
   }, [props.isInvalid])
 
-  const handleInvalid = (e) => {
-    e.preventDefault();
-    setFeedback(e.target.validationMessage)
+  const handleInvalid = (validationMessage) => {
+    setFeedback(validationMessage)
     setClassNames(['field', 'field--invalid'])
+
+    if (typeof props.onInvalid === 'function') {
+      props.onInvalid();
+    }
   }
 
   const hideValidationError = () => {
     setFeedback(props.feedback)
     setClassNames(['field'])
+
+    if (typeof props.onValid === 'function') {
+      props.onValid();
+    }
   }
 
   const handleBlur = (e) => {
-    hideValidationError()
-    if (props.onBlur) {
+    const isValid = e.target.checkValidity();
+
+    if (isValid) {
+      hideValidationError()
+    }
+
+    if (typeof props.onBlur === 'function') {
       props.onBlur(e);
     }
   }
 
   const handleInput = (e) => {
-    hideValidationError()
-    if (props.onInput) {
+    const isValid = e.target.checkValidity();
+
+    if (isValid) {
+      hideValidationError()
+    }
+
+    if (typeof props.onInput === 'function') {
       props.onInput(e);
     }
   }
 
   const handleChange = (e) => {
-    if (props.onChange) {
+    e.target.checkValidity()
+
+    if (typeof props.onChange === 'function') {
       props.onChange(e);
     }
   }
@@ -48,7 +68,7 @@ export default function Field(props) {
   return (
     <div className={classNames.join(' ')}>
       <div className="field__label">{props.children}</div>
-      <input
+      <InputWithValidation
         className="field__input"
         placeholder={props.placeholder}
         type={props.type || 'text'}
@@ -58,11 +78,16 @@ export default function Field(props) {
         autoComplete={props.autocomplete}
         minLength={props.minLength}
         maxLength={props.maxLength}
+        pattern={props.pattern}
         value={props.value}
+        autofocus={props.autofocus}
+        isRealTimeValidation={true}
         onInvalid={handleInvalid}
         onBlur={handleBlur}
         onInput={handleInput}
         onChange={handleChange}
+        onError={handleInvalid}
+        onSuccess={hideValidationError}
       />
       {feedback && <div className="field__feedback">{feedback}</div>}
     </div>

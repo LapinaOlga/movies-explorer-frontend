@@ -24,7 +24,7 @@ export default function Button(props) {
   }
 
   const handleClick = (e) => {
-    if(typeof props.onClick === 'function') {
+    if (props.disabled !== false && typeof props.onClick === 'function') {
       props.onClick(e);
     }
   }
@@ -32,6 +32,7 @@ export default function Button(props) {
   return (
     <button className={classNames.join(' ')}
             type={props.type || 'button'}
+            disabled={props.disabled}
             onClick={handleClick}
     >
       {props.children}

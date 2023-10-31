@@ -4,7 +4,7 @@ import {Link, useLocation} from "react-router-dom";
 const LINKS = [
   {to: '/', title: 'Главная'},
   {to: '/movies', title: 'Фильмы'},
-  {to: '/movies/favorites', title: 'Сохраненные фильмы'},
+  {to: '/favorites', title: 'Сохраненные фильмы'},
 ];
 
 export default function Nav(props) {

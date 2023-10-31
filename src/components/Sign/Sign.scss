@@ -108,4 +108,15 @@
         font-weight: 400;
         line-height: normal;
     }
+
+    &__error {
+        margin-top: 16px;
+        color: $red;
+        text-align: center;
+        font-family: $base-font-family;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
 }
