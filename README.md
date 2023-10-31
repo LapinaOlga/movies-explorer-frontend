@@ -4,6 +4,8 @@
 
 Адрес: https://lapaliv.com
 
+Pull Request: https://github.com/LapinaOlga/movies-explorer-frontend/pull/2
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

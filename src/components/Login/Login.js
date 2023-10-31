@@ -80,6 +80,7 @@ export default function Login(props) {
             E-mail
           </Field>
           <Field type="password"
+                 required
                  disabled={isLoading}
                  autocomplete="current-password"
                  minLength={8}
