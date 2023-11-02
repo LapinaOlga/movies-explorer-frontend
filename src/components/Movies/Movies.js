@@ -3,14 +3,12 @@ import SearchForm from "../SearchForm/SearchForm";
 import MovieCardList from "../MovieCardList/MovieCardList";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
-import {useEffect, useState} from "react";
-import MoviesApi from "../../utils/MoviesApi";
+import {useContext, useEffect, useState} from "react";
 import Toast from "../../utils/Toast";
 import Spinner from "../Spinner/Spinner";
 import MainApi from "../../utils/MainApi";
 import Button from "../Button/Button";
 import Container from "../Container/Container";
-import convertExternalMovie from "../../features/convertExternalMovie";
 import filterMovies from "../../features/filterMovies";
 import {DESKTOP_WIDTH, TABLET_WIDTH} from "../../config/breakpoints";
 import {
@@ -21,17 +19,22 @@ import {
   TABLET_LIMIT,
   TABLET_PER_PAGE
 } from "../../config/movies";
+import {MoviesContext} from "../../contexts/MoviesContext";
+import loadInternalAndExternalMovies from "../../features/loadInternalAndExternalMovies";
 
 export default function Movies(props) {
   const [width, setWidth] = useState(null)
   const [isLoading, setIsLoading] = useState(false);
-  const [allMovies, setAllMovies] = useState(null);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [filteredTotal, setFilteredTotal] = useState([]);
+
+  const {allMovies, setAllMovies} = useContext(MoviesContext);
 
   const [query, setQuery] = useState(localStorage.getItem('query') ?? '');
   const [isShortMovie, setIsShortMovie] = useState(localStorage.getItem('isShortMovie') === '1');
   const [hasNetworkErrors, setHasNetworkErrors] = useState(false);
+
+  let loadingAllMoviesHash = null;
 
   const handleSearch = (payload) => {
     if (!payload.query) {
@@ -49,9 +52,16 @@ export default function Movies(props) {
     setQuery(payload.query)
     setIsShortMovie(payload.isShortMovie)
 
-    if (allMovies === null) {
-      if (payload.query) {
-        loadAllMovies()
+    if (!allMovies.length) {
+      if (payload.query && !isLoading) {
+        const hash = String(Math.random())
+        loadingAllMoviesHash = hash;
+
+        setTimeout(() => {
+          if (hash === loadingAllMoviesHash) {
+            loadAllMovies()
+          }
+        }, 500)
       }
     } else {
       let limit = payload.limit;
@@ -138,22 +148,8 @@ export default function Movies(props) {
 
   const loadAllMovies = () => {
     setIsLoading(true);
-    Promise.all([
-      MoviesApi.getAll(),
-      MainApi.getMovies(),
-    ])
-      .then((responses) => {
-        const movies = responses[0].map((item) => convertExternalMovie(item));
-        movies.map((movie) => {
-          const internalMovie = responses[1].data.find((item) => movie.movieId === item.movieId)
-          if (internalMovie) {
-            movie.id = internalMovie._id
-            movie.isFavorite = true
-          }
-        })
-
-        setAllMovies(movies);
-      })
+    loadInternalAndExternalMovies()
+      .then(setAllMovies)
       .catch((error) => {
         handleAddErrorToast(error.message)
       })

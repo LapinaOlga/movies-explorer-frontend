@@ -1,6 +1,6 @@
 import Main from "../Main/Main";
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
-import {Route, Routes, useNavigate} from "react-router-dom";
+import {Route, Routes, useNavigate, useNavigation} from "react-router-dom";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import Movies from "../Movies/Movies";
 import Profile from "../Profile/Profile";
@@ -13,11 +13,13 @@ import EditProfile from "../EditProfile/EditProfile";
 import Toast from "../../utils/Toast";
 import Toasts from "../Toasts/Toasts";
 import Favorites from "../Favorites/Favorites";
+import {MoviesContext} from "../../contexts/MoviesContext";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [toasts, setToasts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [allMovies, setAllMovies] = useState(null);
   const navigate = useNavigate();
 
   const handleLogin = (token) => {
@@ -86,64 +88,66 @@ function App() {
   return (
     <div>
       <CurrentUserContext.Provider value={currentUser}>
-        <Routes>
-          <Route
-            path="/signup"
-            element={
-              <Register onSuccess={handleLogin}/>
-            }
-          />
-          <Route
-            path="/signin"
-            element={
-              <Login onSuccess={handleLogin}/>
-            }
-          />
-          <Route
-            path="/"
-            element={
-              <Main/>
-            }
-          />
-          <Route
-            path="/movies"
-            element={
-              <ProtectedRoute currentUser={currentUser}>
-                <Movies addToast={addToast}/>
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/favorites"
-            element={
-              <ProtectedRoute currentUser={currentUser}>
-                <Favorites addToast={addToast}/>
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/profile"
-            element={
-              <ProtectedRoute currentUser={currentUser}>
-                <Profile onLogout={handleLogout}/>
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/profile/edit"
-            element={
-              <ProtectedRoute currentUser={currentUser}>
-                <EditProfile onSuccess={handleEditProfile} addToast={addToast}/>
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="*"
-            element={
-              <NotFound/>
-            }
-          />
-        </Routes>
+        <MoviesContext.Provider value={{allMovies: allMovies || [], setAllMovies}}>
+          <Routes>
+            <Route
+              path="/signup"
+              element={
+                <Register onSuccess={handleLogin}/>
+              }
+            />
+            <Route
+              path="/signin"
+              element={
+                <Login onSuccess={handleLogin}/>
+              }
+            />
+            <Route
+              path="/"
+              element={
+                <Main/>
+              }
+            />
+            <Route
+              path="/movies"
+              element={
+                <ProtectedRoute currentUser={currentUser}>
+                  <Movies addToast={addToast}/>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/favorites"
+              element={
+                <ProtectedRoute currentUser={currentUser}>
+                  <Favorites addToast={addToast}/>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute currentUser={currentUser}>
+                  <Profile onLogout={handleLogout}/>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/profile/edit"
+              element={
+                <ProtectedRoute currentUser={currentUser}>
+                  <EditProfile onSuccess={handleEditProfile} addToast={addToast}/>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="*"
+              element={
+                <NotFound/>
+              }
+            />
+          </Routes>
+        </MoviesContext.Provider>
       </CurrentUserContext.Provider>
       <Toasts list={toasts}/>
     </div>

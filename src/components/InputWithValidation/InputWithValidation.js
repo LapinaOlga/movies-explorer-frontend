@@ -8,13 +8,13 @@ export default function InputWithValidation(props) {
     e.preventDefault();
 
     if (props.onError) {
-      props.onError(e.target.validationMessage)
+      props.onError(e.target)
     }
   }
 
-  const hideValidationError = () => {
+  const handleSuccess = (target) => {
     if (typeof props.onSuccess === 'function') {
-      props.onSuccess()
+      props.onSuccess(target)
     }
   }
 
@@ -23,7 +23,7 @@ export default function InputWithValidation(props) {
       const isValid = e.target.checkValidity();
 
       if (isValid) {
-        hideValidationError()
+        handleSuccess(e.target)
       }
     }
 
@@ -37,7 +37,7 @@ export default function InputWithValidation(props) {
       const isValid = e.target.checkValidity();
 
       if (isValid) {
-        hideValidationError()
+        handleSuccess(e.target)
       }
     }
 
@@ -62,6 +62,16 @@ export default function InputWithValidation(props) {
     }
   }, []);
 
+  useEffect(() => {
+    if (isRealTimeValidation) {
+      const isValid = ref.current.checkValidity();
+
+      if (isValid) {
+        handleSuccess(ref.current)
+      }
+    }
+  }, [props.value]);
+
   return (
     <input
       ref={ref}
@@ -71,7 +81,7 @@ export default function InputWithValidation(props) {
       name={props.name}
       required={props.required}
       disabled={props.disabled}
-      autoComplete={props.autocomplete}
+      autoComplete={props.autoComplete}
       minLength={props.minLength}
       maxLength={props.maxLength}
       autoFocus={props.autofocus}

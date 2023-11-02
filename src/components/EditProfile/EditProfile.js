@@ -16,6 +16,8 @@ export default function EditProfile(props) {
   const [email, setEmail] = useState(currentUser.email);
   const [name, setName] = useState(currentUser.name);
   const [isInvalidForm, setIsInvalidForm] = useState(false);
+  const [isNameValid, setIsNameValid] = useState(false);
+  const [isEmailValid, setIsEmailValid] = useState(false);
   const navigate = useNavigate();
 
   const onSubmit = (e) => {
@@ -41,12 +43,24 @@ export default function EditProfile(props) {
     }
   }
 
-  const handleOnInvalid = () => {
-    setIsInvalidForm(true);
+  const handleOnInvalid = (target) => {
+    const inputName = target.getAttribute('name');
+
+    if(inputName === 'email') {
+      setIsEmailValid(false)
+    } else {
+      setIsNameValid(false)
+    }
   }
 
-  const handleOnValid = () => {
-    setIsInvalidForm(false);
+  const handleOnValid = (target) => {
+    const inputName = target.getAttribute('name');
+
+    if(inputName === 'email') {
+      setIsEmailValid(true)
+    } else {
+      setIsNameValid(true)
+    }
   }
 
   useEffect(() => {
@@ -54,6 +68,10 @@ export default function EditProfile(props) {
       navigate('/signin')
     }
   }, [currentUser])
+
+  useEffect(() => {
+    setIsInvalidForm(!isEmailValid || !isNameValid)
+  }, [isEmailValid, isNameValid])
 
   return (
     <>
@@ -65,6 +83,7 @@ export default function EditProfile(props) {
               <div className="edit-profile__title">Изменение профиля</div>
               <FieldList className="edit-profile__fields">
                 <Field
+                  name="name"
                   type="text"
                   minLength={2}
                   maxLength={30}
@@ -79,6 +98,7 @@ export default function EditProfile(props) {
                   Имя
                 </Field>
                 <Field
+                  name="email"
                   type="email"
                   required
                   disabled={isLoading}

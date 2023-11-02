@@ -2,28 +2,37 @@ import SearchForm from "../SearchForm/SearchForm";
 import MovieCardList from "../MovieCardList/MovieCardList";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import Spinner from "../Spinner/Spinner";
 import MainApi from "../../utils/MainApi";
 import Container from "../Container/Container";
-import convertInternalMovie from "../../features/convertInternalMovie";
 import filterMovies from "../../features/filterMovies";
 import Toast from "../../utils/Toast";
+import {MoviesContext} from "../../contexts/MoviesContext";
+import loadInternalAndExternalMovies from "../../features/loadInternalAndExternalMovies";
+import './Favorites.scss'
 
 export default function Favorites(props) {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [query, setQuery] = useState('');
   const [isShortMovie, setIsShortMovie] = useState(false);
   const [hasNetworkErrors, setHasNetworkErrors] = useState(false);
-  const [allMovies, setAllMovies] = useState([]);
+
+  const {allMovies, setAllMovies} = useContext(MoviesContext);
+
+  let loadingAllMoviesHash = null;
 
   const handleSearch = (payload) => {
     setQuery(payload.query)
     setIsShortMovie(payload.isShortMovie)
 
     setFilteredMovies(
-      filterMovies(allMovies, payload.query, payload.isShortMovie)
+      filterMovies(
+        allMovies.filter((item) => item.isFavorite),
+        payload.query,
+        payload.isShortMovie
+      )
     )
   }
 
@@ -44,23 +53,31 @@ export default function Favorites(props) {
   }
 
   useEffect(() => {
-    MainApi.getMovies()
-      .then((response) => {
-        setAllMovies(
-          response.data.map((item) => convertInternalMovie(item))
-        );
-      })
-      .catch((error) => {
-        handleAddErrorToast(error.message)
-        setHasNetworkErrors(true);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      })
+    if (!allMovies.length && !isLoading) {
+      const hash = String(Math.random())
+      loadingAllMoviesHash = hash
+
+      setTimeout(() => {
+        if (hash === loadingAllMoviesHash) {
+          setIsLoading(true)
+          loadInternalAndExternalMovies()
+            .then(setAllMovies)
+            .catch((error) => {
+              handleAddErrorToast(error.message)
+              setHasNetworkErrors(true);
+            })
+            .finally(() => {
+              setIsLoading(false);
+            })
+        }
+      }, 500)
+    }
   }, [])
 
   useEffect(() => {
-    handleSearch({query, isShortMovie})
+    if (allMovies.length) {
+      handleSearch({query, isShortMovie})
+    }
   }, [allMovies])
 
   return (

@@ -15,21 +15,21 @@ export default function Field(props) {
     setFeedback(props.feedback);
   }, [props.isInvalid])
 
-  const handleInvalid = (validationMessage) => {
-    setFeedback(validationMessage)
+  const handleInvalid = (target) => {
+    setFeedback(target.validationMessage)
     setClassNames(['field', 'field--invalid'])
 
     if (typeof props.onInvalid === 'function') {
-      props.onInvalid();
+      props.onInvalid(target);
     }
   }
 
-  const hideValidationError = () => {
+  const hideValidationError = (target) => {
     setFeedback(props.feedback)
     setClassNames(['field'])
 
     if (typeof props.onValid === 'function') {
-      props.onValid();
+      props.onValid(target);
     }
   }
 
@@ -37,7 +37,7 @@ export default function Field(props) {
     const isValid = e.target.checkValidity();
 
     if (isValid) {
-      hideValidationError()
+      hideValidationError(e.target)
     }
 
     if (typeof props.onBlur === 'function') {
@@ -49,7 +49,7 @@ export default function Field(props) {
     const isValid = e.target.checkValidity();
 
     if (isValid) {
-      hideValidationError()
+      hideValidationError(e.target)
     }
 
     if (typeof props.onInput === 'function') {
@@ -75,7 +75,7 @@ export default function Field(props) {
         name={props.name}
         required={props.required}
         disabled={props.disabled}
-        autoComplete={props.autocomplete}
+        autoComplete={props.autoComplete}
         minLength={props.minLength}
         maxLength={props.maxLength}
         pattern={props.pattern}

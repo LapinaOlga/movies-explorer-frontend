@@ -13,6 +13,8 @@ export default function Login(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isInvalidForm, setIsInvalidForm] = useState(false);
+  const [isEmailValid, setIsEmailValid] = useState(false);
+  const [isPasswordValid, setIsPasswordValid] = useState(false);
   const currentUser = useContext(CurrentUserContext);
   const navigate = useNavigate();
 
@@ -38,12 +40,24 @@ export default function Login(props) {
     }
   }
 
-  const handleOnInvalid = () => {
-    setIsInvalidForm(true);
+  const handleOnInvalid = (target) => {
+    const inputName = target.getAttribute('name');
+
+    if (inputName === 'email') {
+      setIsEmailValid(false)
+    } else {
+      setIsPasswordValid(false)
+    }
   }
 
-  const handleOnValid = () => {
-    setIsInvalidForm(false);
+  const handleOnValid = (target) => {
+    const inputName = target.getAttribute('name');
+
+    if (inputName === 'email') {
+      setIsEmailValid(true)
+    } else {
+      setIsPasswordValid(true)
+    }
   }
 
   useEffect(() => {
@@ -51,6 +65,10 @@ export default function Login(props) {
       navigate('/')
     }
   }, [currentUser])
+
+  useEffect(() => {
+    setIsInvalidForm(!isEmailValid || !isPasswordValid)
+  }, [isEmailValid, isPasswordValid])
 
   return (
     <form onSubmit={handleSubmitForm}>
@@ -70,10 +88,11 @@ export default function Login(props) {
       >
         <FieldList>
           <Field
+            name="email"
             type="email"
             required
             disabled={isLoading}
-            autocomplete="username"
+            autoComplete="username"
             onChange={(e) => setEmail(e.target.value)}
             onInvalid={handleOnInvalid}
             onValid={handleOnValid}
@@ -81,10 +100,11 @@ export default function Login(props) {
             E-mail
           </Field>
           <Field
+            name="password"
             type="password"
             required
             disabled={isLoading}
-            autocomplete="current-password"
+            autoComplete="current-password"
             minLength={8}
             isInvalid={!!serverError}
             feedback={serverError}

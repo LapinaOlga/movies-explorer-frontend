@@ -2,7 +2,7 @@ import FieldList from "../FieldList/FieldList";
 import Field from "../Field/Field";
 import Button from "../Button/Button";
 import Sign from "../Sign/Sign";
-import {useContext, useEffect, useState} from "react";
+import {useContext, useEffect, useRef, useState} from "react";
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 import {useNavigate} from "react-router-dom";
 import MainApi from "../../utils/MainApi";
@@ -14,8 +14,12 @@ export default function Register(props) {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [isInvalidForm, setIsInvalidForm] = useState(false);
+  const [isNameValid, setIsNameValid] = useState(false);
+  const [isEmailValid, setIsEmailValid] = useState(false);
+  const [isPasswordValid, setIsPasswordValid] = useState(false);
   const currentUser = useContext(CurrentUserContext);
   const navigate = useNavigate();
+  const form = useRef();
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -45,12 +49,28 @@ export default function Register(props) {
     }
   }
 
-  const handleOnInvalid = () => {
-    setIsInvalidForm(true);
+  const handleOnInvalid = (target) => {
+    const inputName = target.getAttribute('name');
+
+    if (inputName === 'name') {
+      setIsNameValid(false)
+    } else if (inputName === 'email') {
+      setIsEmailValid(false)
+    } else {
+      setIsPasswordValid(false)
+    }
   }
 
-  const handleOnValid = () => {
-    setIsInvalidForm(false);
+  const handleOnValid = (target) => {
+    const inputName = target.getAttribute('name');
+
+    if (inputName === 'name') {
+      setIsNameValid(true)
+    } else if (inputName === 'email') {
+      setIsEmailValid(true)
+    } else {
+      setIsPasswordValid(true)
+    }
   }
 
   useEffect(() => {
@@ -59,8 +79,12 @@ export default function Register(props) {
     }
   }, [currentUser])
 
+  useEffect(() => {
+    setIsInvalidForm(!isNameValid || !isEmailValid || !isPasswordValid)
+  }, [isNameValid, isEmailValid, isPasswordValid])
+
   return (
-    <form onSubmit={onSubmit}>
+    <form ref={form} onSubmit={onSubmit}>
       <Sign
         title="Добро пожаловать!"
         submit={
@@ -78,6 +102,7 @@ export default function Register(props) {
       >
         <FieldList>
           <Field
+            name="name"
             type="text"
             minLength={2}
             maxLength={30}
@@ -93,11 +118,12 @@ export default function Register(props) {
             Имя
           </Field>
           <Field
+            name="email"
             type="email"
             required
             disabled={isLoading}
             value={email}
-            autocomplete="username"
+            autoComplete="username"
             onChange={(e) => setEmail(e.target.value)}
             onInvalid={handleOnInvalid}
             onValid={handleOnValid}
@@ -105,10 +131,11 @@ export default function Register(props) {
             E-mail
           </Field>
           <Field
+            name="password"
             type="password"
             required
             disabled={isLoading}
-            autocomplete="current-password"
+            autoComplete="current-password"
             minLength={8}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
