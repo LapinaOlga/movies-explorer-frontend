@@ -6,6 +6,7 @@ import {useContext, useEffect, useState} from "react";
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 import {useNavigate} from "react-router-dom";
 import MainApi from "../../utils/MainApi";
+import {EMAIL_PATTERN} from "../../config/app";
 
 export default function Login(props) {
   const [isLoading, setIsLoading] = useState(false)
@@ -93,6 +94,7 @@ export default function Login(props) {
             required
             disabled={isLoading}
             autoComplete="username"
+            pattern={EMAIL_PATTERN}
             onChange={(e) => setEmail(e.target.value)}
             onInvalid={handleOnInvalid}
             onValid={handleOnValid}

@@ -33,6 +33,10 @@ export default function EditProfile(props) {
             props.onSuccess(res.data);
           }
 
+          if (typeof props.addToast === 'function') {
+            props.addToast(new Toast('green', 'Данные успешно сохранены'))
+          }
+
           navigate('/profile')
         })
         .catch((error) => {
@@ -46,7 +50,7 @@ export default function EditProfile(props) {
   const handleOnInvalid = (target) => {
     const inputName = target.getAttribute('name');
 
-    if(inputName === 'email') {
+    if (inputName === 'email') {
       setIsEmailValid(false)
     } else {
       setIsNameValid(false)
@@ -56,7 +60,7 @@ export default function EditProfile(props) {
   const handleOnValid = (target) => {
     const inputName = target.getAttribute('name');
 
-    if(inputName === 'email') {
+    if (inputName === 'email') {
       setIsEmailValid(true)
     } else {
       setIsNameValid(true)
