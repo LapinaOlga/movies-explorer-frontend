@@ -17,11 +17,12 @@ export default function MovieCardList(props) {
 
   const movieList = props.movies.map((movie) => {
     return (
-      <MovieCard movie={movie}
-                 key={movie.movieId}
-                 behavior={props.behavior}
-                 onLike={handleLike}
-                 onDislike={handleDislike}
+      <MovieCard
+        movie={movie}
+        key={movie.movieId}
+        behavior={props.behavior}
+        onLike={handleLike}
+        onDislike={handleDislike}
       />
     );
   })

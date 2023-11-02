@@ -1,5 +1,4 @@
 import './Toasts.scss'
-import cross from '../../images/cross.svg'
 
 export default function Toasts(props) {
   if (!props.list.length) {

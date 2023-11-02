@@ -12,16 +12,15 @@ import Button from "../Button/Button";
 import Container from "../Container/Container";
 import convertExternalMovie from "../../features/convertExternalMovie";
 import filterMovies from "../../features/filterMovies";
-
-const DESKTOP_PER_PAGE = 3;
-const DESKTOP_LIMIT = DESKTOP_PER_PAGE * 4;
-const TABLET_PER_PAGE = 2;
-const TABLET_LIMIT = TABLET_PER_PAGE * 4;
-const MOBILE_PER_PAGE = 2;
-const MOBILE_LIMIT = 5;
-
-const TABLET_WIDTH = 768;
-const DESKTOP_WIDTH = 1140;
+import {DESKTOP_WIDTH, TABLET_WIDTH} from "../../config/breakpoints";
+import {
+  DESKTOP_LIMIT,
+  DESKTOP_PER_PAGE,
+  MOBILE_LIMIT,
+  MOBILE_PER_PAGE,
+  TABLET_LIMIT,
+  TABLET_PER_PAGE
+} from "../../config/movies";
 
 export default function Movies(props) {
   const [width, setWidth] = useState(null)
@@ -88,6 +87,7 @@ export default function Movies(props) {
         ])
       })
       .catch((error) => {
+        setHasNetworkErrors(true);
         handleAddErrorToast(error.message);
       })
   }
@@ -107,6 +107,7 @@ export default function Movies(props) {
         ])
       })
       .catch((error) => {
+        setHasNetworkErrors(true);
         handleAddErrorToast(error.message)
       })
   }
@@ -219,10 +220,11 @@ export default function Movies(props) {
     <>
       <Header/>
       <main className="movies">
-        <SearchForm query={query}
-                    isShortMovie={isShortMovie}
-                    onSubmit={handleSearch}
-                    onError={handleAddErrorToast}
+        <SearchForm
+          query={query}
+          isShortMovie={isShortMovie}
+          onSubmit={handleSearch}
+          onError={handleAddErrorToast}
         />
         {hasNetworkErrors &&
           <div className="movies__error">
@@ -236,10 +238,11 @@ export default function Movies(props) {
             {!isLoading &&
               <>
                 {filteredMovies.length > 0 &&
-                  <MovieCardList movies={filteredMovies}
-                                 behavior="all"
-                                 onLike={handleLike}
-                                 onDislike={handleDislike}
+                  <MovieCardList
+                    movies={filteredMovies}
+                    behavior="all"
+                    onLike={handleLike}
+                    onDislike={handleDislike}
                   />
                 }
 

@@ -2,7 +2,7 @@ import './Profile.scss'
 import Container from "../Container/Container";
 import Button from "../Button/Button";
 import Header from "../Header/Header";
-import {useContext, useState} from "react";
+import {useContext} from "react";
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 import {useNavigate} from "react-router-dom";
 

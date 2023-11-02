@@ -64,7 +64,7 @@ export default function Register(props) {
       <Sign
         title="Добро пожаловать!"
         submit={
-          <Button variant="orange" type="submit" disabled={isInvalidForm}>
+          <Button variant="orange" type="submit" disabled={isInvalidForm || isLoading}>
             Зарегистрироваться {isInvalidForm}
           </Button>
         }
@@ -77,40 +77,43 @@ export default function Register(props) {
         serverError={serverError}
       >
         <FieldList>
-          <Field type="text"
-                 minLength={2}
-                 maxLength={30}
-                 required
-                 autofocus
-                 disabled={isLoading}
-                 value={name}
-                 pattern="[a-zA-Zа-яёА-ЯË \-]+"
-                 onChange={(e) => setName(e.target.value)}
-                 onInvalid={handleOnInvalid}
-                 onValid={handleOnValid}
+          <Field
+            type="text"
+            minLength={2}
+            maxLength={30}
+            required
+            autofocus
+            disabled={isLoading}
+            value={name}
+            pattern="[a-zA-Zа-яёА-ЯË \-]+"
+            onChange={(e) => setName(e.target.value)}
+            onInvalid={handleOnInvalid}
+            onValid={handleOnValid}
           >
             Имя
           </Field>
-          <Field type="email"
-                 required
-                 disabled={isLoading}
-                 value={email}
-                 autocomplete="username"
-                 onChange={(e) => setEmail(e.target.value)}
-                 onInvalid={handleOnInvalid}
-                 onValid={handleOnValid}
+          <Field
+            type="email"
+            required
+            disabled={isLoading}
+            value={email}
+            autocomplete="username"
+            onChange={(e) => setEmail(e.target.value)}
+            onInvalid={handleOnInvalid}
+            onValid={handleOnValid}
           >
             E-mail
           </Field>
-          <Field type="password"
-                 required
-                 disabled={isLoading}
-                 autocomplete="current-password"
-                 minLength={8}
-                 value={password}
-                 onChange={(e) => setPassword(e.target.value)}
-                 onInvalid={handleOnInvalid}
-                 onValid={handleOnValid}
+          <Field
+            type="password"
+            required
+            disabled={isLoading}
+            autocomplete="current-password"
+            minLength={8}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            onInvalid={handleOnInvalid}
+            onValid={handleOnValid}
           >
             Пароль
           </Field>

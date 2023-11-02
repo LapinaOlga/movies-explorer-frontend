@@ -30,10 +30,11 @@ export default function Button(props) {
   }
 
   return (
-    <button className={classNames.join(' ')}
-            type={props.type || 'button'}
-            disabled={props.disabled}
-            onClick={handleClick}
+    <button
+      className={classNames.join(' ')}
+      type={props.type || 'button'}
+      disabled={props.disabled}
+      onClick={handleClick}
     >
       {props.children}
     </button>

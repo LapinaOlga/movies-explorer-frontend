@@ -64,33 +64,35 @@ export default function EditProfile(props) {
             <div className="edit-profile__content">
               <div className="edit-profile__title">Изменение профиля</div>
               <FieldList className="edit-profile__fields">
-                <Field type="text"
-                       minLength={2}
-                       maxLength={30}
-                       required
-                       disabled={isLoading}
-                       value={name}
-                       pattern="[a-zA-Zа-яёА-ЯË \-]+"
-                       onChange={(e) => setName(e.target.value)}
-                       onInvalid={handleOnInvalid}
-                       onValid={handleOnValid}
+                <Field
+                  type="text"
+                  minLength={2}
+                  maxLength={30}
+                  required
+                  disabled={isLoading}
+                  value={name}
+                  pattern="[a-zA-Zа-яёА-ЯË \-]+"
+                  onChange={(e) => setName(e.target.value)}
+                  onInvalid={handleOnInvalid}
+                  onValid={handleOnValid}
                 >
                   Имя
                 </Field>
-                <Field type="email"
-                       required
-                       disabled={isLoading}
-                       value={email}
-                       autocomplete="username"
-                       onChange={(e) => setEmail(e.target.value)}
-                       onInvalid={handleOnInvalid}
-                       onValid={handleOnValid}
+                <Field
+                  type="email"
+                  required
+                  disabled={isLoading}
+                  value={email}
+                  autocomplete="username"
+                  onChange={(e) => setEmail(e.target.value)}
+                  onInvalid={handleOnInvalid}
+                  onValid={handleOnValid}
                 >
                   E-mail
                 </Field>
               </FieldList>
               <div className="edit-profile__buttons">
-                <Button variant="orange" type="submit" disabled={isInvalidForm}>Сохранить</Button>
+                <Button variant="orange" type="submit" disabled={isInvalidForm || isLoading}>Сохранить</Button>
                 <Button to="/profile" variant="link-orange">Назад</Button>
               </div>
             </div>

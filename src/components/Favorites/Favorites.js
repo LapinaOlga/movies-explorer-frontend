@@ -29,7 +29,7 @@ export default function Favorites(props) {
 
   const handleDislike = (movie) => {
     MainApi.deleteMovie(movie.id)
-      .then((res) => {
+      .then(() => {
         setAllMovies(allMovies.filter((item) => item.id !== movie.id))
       })
       .catch((error) => {
@@ -67,10 +67,11 @@ export default function Favorites(props) {
     <>
       <Header/>
       <main className="favorites">
-        <SearchForm query={query}
-                    isShortMovie={isShortMovie}
-                    onSubmit={handleSearch}
-                    onError={handleAddErrorToast}
+        <SearchForm
+          query={query}
+          isShortMovie={isShortMovie}
+          onSubmit={handleSearch}
+          onError={handleAddErrorToast}
         />
         {hasNetworkErrors &&
           <div className="favorites__error">
@@ -84,9 +85,10 @@ export default function Favorites(props) {
             {!isLoading &&
               <>
                 {filteredMovies.length > 0 &&
-                  <MovieCardList movies={filteredMovies}
-                                 behavior="favorites"
-                                 onDislike={handleDislike}
+                  <MovieCardList
+                    movies={filteredMovies}
+                    behavior="favorites"
+                    onDislike={handleDislike}
                   />
                 }
 

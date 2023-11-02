@@ -19,14 +19,16 @@ export default function Switch(props) {
 
   return (
     <div className="switch">
-      <input type="checkbox"
-             className="switch__input"
-             role="switch"
-             ref={ref}
-             onChange={handleChange}
+      <input
+        type="checkbox"
+        className="switch__input"
+        role="switch"
+        ref={ref}
+        onChange={handleChange}
       />
-      <label className="switch__label"
-             onClick={handleClickOnLabel}
+      <label
+        className="switch__label"
+        onClick={handleClickOnLabel}
       >
         {props.children}
       </label>

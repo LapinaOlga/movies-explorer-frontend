@@ -12,9 +12,10 @@ export default function ProfileButton(props) {
   }
 
   return (
-    <Button className={classNames.join(' ')}
-            variant="transparent"
-            to="/profile"
+    <Button
+      className={classNames.join(' ')}
+      variant="transparent"
+      to="/profile"
     >
       <div className="profile-button__label">Аккаунт</div>
       <div className="profile-button__icon">

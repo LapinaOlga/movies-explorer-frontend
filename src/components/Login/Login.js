@@ -57,7 +57,7 @@ export default function Login(props) {
       <Sign
         title="Рады видеть!"
         submit={
-          <Button variant="orange" type="submit" disabled={isInvalidForm}>
+          <Button variant="orange" type="submit" disabled={isInvalidForm || isLoading}>
             Войти
           </Button>
         }
@@ -69,29 +69,31 @@ export default function Login(props) {
         }
       >
         <FieldList>
-          <Field type="email"
-                 required
-                 disabled={isLoading}
-                 autocomplete="username"
-                 onChange={(e) => setEmail(e.target.value)}
-                 onInvalid={handleOnInvalid}
-                 onValid={handleOnValid}
+          <Field
+            type="email"
+            required
+            disabled={isLoading}
+            autocomplete="username"
+            onChange={(e) => setEmail(e.target.value)}
+            onInvalid={handleOnInvalid}
+            onValid={handleOnValid}
           >
             E-mail
           </Field>
-          <Field type="password"
-                 required
-                 disabled={isLoading}
-                 autocomplete="current-password"
-                 minLength={8}
-                 isInvalid={!!serverError}
-                 feedback={serverError}
-                 onChange={(e) => {
-                   setPassword(e.target.value);
-                   setServerError(null)
-                 }}
-                 onInvalid={handleOnInvalid}
-                 onValid={handleOnValid}
+          <Field
+            type="password"
+            required
+            disabled={isLoading}
+            autocomplete="current-password"
+            minLength={8}
+            isInvalid={!!serverError}
+            feedback={serverError}
+            onChange={(e) => {
+              setPassword(e.target.value);
+              setServerError(null)
+            }}
+            onInvalid={handleOnInvalid}
+            onValid={handleOnValid}
           >
             Пароль
           </Field>
