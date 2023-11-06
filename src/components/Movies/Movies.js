@@ -187,7 +187,7 @@ export default function Movies(props) {
   }, [])
 
   useEffect(() => {
-    if (!filteredMovies.length) {
+    if (query && !filteredMovies.length) {
       handleSearch({query, isShortMovie})
     }
   }, [allMovies])
@@ -205,11 +205,13 @@ export default function Movies(props) {
       limit = DESKTOP_LIMIT
     }
 
-    handleSearch({
-      query,
-      isShortMovie,
-      limit: Math.max(filteredMovies.length - filteredMovies.length % perPage, limit),
-    })
+    if (query) {
+      handleSearch({
+        query,
+        isShortMovie,
+        limit: Math.max(filteredMovies.length - filteredMovies.length % perPage, limit),
+      })
+    }
   }, [width])
 
   return (
