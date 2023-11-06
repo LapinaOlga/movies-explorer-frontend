@@ -2,17 +2,24 @@
 
 .movie-card {
     background: $gray-1;
-    box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 30px 0 rgba(0, 0, 0, 0.08);
     display: flex;
     flex-direction: column;
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover {
+        opacity: 0.8;
+    }
 
     &__header {
         padding: 14px;
         display: flex;
         flex-direction: row;
         gap: 14px;
-        align-items: center;
+        align-items: flex-start;
         justify-content: center;
+        flex-grow: 1;
     }
 
     &__left {

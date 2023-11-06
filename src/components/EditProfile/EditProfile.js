@@ -7,14 +7,19 @@ import {useNavigate} from "react-router-dom";
 import Header from "../Header/Header";
 import Container from "../Container/Container";
 import './EditProfile.scss'
+import MainApi from "../../utils/MainApi";
+import Toast from "../../utils/Toast";
+import {EMAIL_PATTERN, NAME_PATTERN} from "../../config/app";
 
 export default function EditProfile(props) {
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
   const currentUser = useContext(CurrentUserContext);
+  const [isLoading, setIsLoading] = useState(false);
+  const [email, setEmail] = useState(currentUser.email);
+  const [name, setName] = useState(currentUser.name);
+  const [isInvalidForm, setIsInvalidForm] = useState(false);
+  const [isDataChanged, setIsDataChanged] = useState(false);
+  const [isNameValid, setIsNameValid] = useState(false);
+  const [isEmailValid, setIsEmailValid] = useState(false);
   const navigate = useNavigate();
 
   const onSubmit = (e) => {
@@ -22,18 +27,65 @@ export default function EditProfile(props) {
     const isValid = e.target.reportValidity();
 
     if (isValid) {
+      if (!isDataChanged) {
+        return;
+      }
+
       setIsLoading(true);
-      props.onSubmit({email, password, name}, (errorMessage) => {
-        setError(errorMessage);
-      })
+
+      MainApi.patchMe({name, email})
+        .then((res) => {
+          if (typeof props.onSuccess === 'function') {
+            props.onSuccess(res.data);
+          }
+
+          if (typeof props.addToast === 'function') {
+            props.addToast(new Toast('green', 'Данные успешно сохранены'))
+          }
+
+          navigate('/profile')
+        })
+        .catch((error) => {
+          if (typeof props.addToast === 'function') {
+            props.addToast(new Toast('red', error.message))
+          }
+        })
+    }
+  }
+
+  const handleOnInvalid = (target) => {
+    const inputName = target.getAttribute('name');
+
+    if (inputName === 'email') {
+      setIsEmailValid(false)
+    } else {
+      setIsNameValid(false)
+    }
+  }
+
+  const handleOnValid = (target) => {
+    const inputName = target.getAttribute('name');
+
+    if (inputName === 'email') {
+      setIsEmailValid(true)
+    } else {
+      setIsNameValid(true)
     }
   }
 
   useEffect(() => {
     if (!currentUser) {
-      navigate('/sign-in')
+      navigate('/signin')
     }
   }, [currentUser])
+
+  useEffect(() => {
+    setIsInvalidForm(!isEmailValid || !isNameValid)
+  }, [isEmailValid, isNameValid])
+
+  useEffect(() => {
+    setIsDataChanged(email !== currentUser.email || name !== currentUser.name)
+  }, [email, name])
 
   return (
     <>
@@ -44,28 +96,41 @@ export default function EditProfile(props) {
             <div className="edit-profile__content">
               <div className="edit-profile__title">Изменение профиля</div>
               <FieldList className="edit-profile__fields">
-                <Field type="text"
-                       minLength={2}
-                       maxLength={30}
-                       required
-                       disabled={isLoading}
-                       value={name}
-                       onChange={(e) => setName(e.target.value)}
+                <Field
+                  name="name"
+                  type="text"
+                  minLength={2}
+                  maxLength={30}
+                  required
+                  disabled={isLoading}
+                  value={name}
+                  pattern={NAME_PATTERN}
+                  defaultValidationMessage="Пожалуйста укажите валидное имя"
+                  onChange={(e) => setName(e.target.value)}
+                  onInvalid={handleOnInvalid}
+                  onValid={handleOnValid}
                 >
                   Имя
                 </Field>
-                <Field type="email"
-                       required
-                       disabled={isLoading}
-                       value={email}
-                       autocomplete="username"
-                       onChange={(e) => setEmail(e.target.value)}
+                <Field
+                  name="email"
+                  type="email"
+                  required
+                  disabled={isLoading}
+                  value={email}
+                  autocomplete="username"
+                  pattern={EMAIL_PATTERN}
+                  defaultValidationMessage="Пожалуйста укажите валидный email"
+                  onChange={(e) => setEmail(e.target.value)}
+                  onInvalid={handleOnInvalid}
+                  onValid={handleOnValid}
                 >
                   E-mail
                 </Field>
               </FieldList>
               <div className="edit-profile__buttons">
-                <Button variant="orange" type="submit">Сохранить</Button>
+                <Button variant="orange" type="submit"
+                        disabled={isInvalidForm || isLoading || !isDataChanged}>Сохранить</Button>
                 <Button to="/profile" variant="link-orange">Назад</Button>
               </div>
             </div>

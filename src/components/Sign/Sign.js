@@ -19,6 +19,7 @@ export default function Sign(props) {
             </div>
             <div className="sign__body">
               {props.children}
+              {props.serverError && <div className="sign__error">{props.serverError}</div>}
             </div>
             <div className="sign__footer">
               {props.submit}

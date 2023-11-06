@@ -1,5 +1,6 @@
 import './Field.scss'
 import {useEffect, useState} from "react";
+import InputWithValidation from "../InputWithValidation/InputWithValidation";
 
 export default function Field(props) {
   const [feedback, setFeedback] = useState(props.feedback)
@@ -14,33 +15,38 @@ export default function Field(props) {
     setFeedback(props.feedback);
   }, [props.isInvalid])
 
-  const handleInvalid = (e) => {
-    e.preventDefault();
-    setFeedback(e.target.validationMessage)
+  const handleInvalid = (target) => {
+    setFeedback(target.validationMessage || props.defaultValidationMessage)
     setClassNames(['field', 'field--invalid'])
+
+    if (typeof props.onInvalid === 'function') {
+      props.onInvalid(target);
+    }
   }
 
-  const hideValidationError = () => {
+  const hideValidationError = (target) => {
     setFeedback(props.feedback)
     setClassNames(['field'])
+
+    if (typeof props.onValid === 'function') {
+      props.onValid(target);
+    }
   }
 
   const handleBlur = (e) => {
-    hideValidationError()
-    if (props.onBlur) {
+    if (typeof props.onBlur === 'function') {
       props.onBlur(e);
     }
   }
 
   const handleInput = (e) => {
-    hideValidationError()
-    if (props.onInput) {
+    if (typeof props.onInput === 'function') {
       props.onInput(e);
     }
   }
 
   const handleChange = (e) => {
-    if (props.onChange) {
+    if (typeof props.onChange === 'function') {
       props.onChange(e);
     }
   }
@@ -48,21 +54,26 @@ export default function Field(props) {
   return (
     <div className={classNames.join(' ')}>
       <div className="field__label">{props.children}</div>
-      <input
+      <InputWithValidation
         className="field__input"
         placeholder={props.placeholder}
         type={props.type || 'text'}
         name={props.name}
         required={props.required}
         disabled={props.disabled}
-        autoComplete={props.autocomplete}
+        autoComplete={props.autoComplete}
         minLength={props.minLength}
         maxLength={props.maxLength}
+        pattern={props.pattern}
         value={props.value}
+        autofocus={props.autofocus}
+        isRealTimeValidation={true}
         onInvalid={handleInvalid}
         onBlur={handleBlur}
         onInput={handleInput}
         onChange={handleChange}
+        onError={handleInvalid}
+        onSuccess={hideValidationError}
       />
       {feedback && <div className="field__feedback">{feedback}</div>}
     </div>

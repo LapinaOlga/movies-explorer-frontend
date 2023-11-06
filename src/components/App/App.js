@@ -1,53 +1,42 @@
-import './App.scss';
 import Main from "../Main/Main";
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
-import {Route, Routes, useNavigate} from "react-router-dom";
+import {Route, Routes, useNavigate, useNavigation} from "react-router-dom";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import Movies from "../Movies/Movies";
 import Profile from "../Profile/Profile";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
-import Api from "../../utils/api";
+import MainApi from "../../utils/MainApi";
 import {useEffect, useState} from "react";
 import NotFound from "../NotFound/NotFound";
 import EditProfile from "../EditProfile/EditProfile";
+import Toast from "../../utils/Toast";
+import Toasts from "../Toasts/Toasts";
+import Favorites from "../Favorites/Favorites";
+import {MoviesContext} from "../../contexts/MoviesContext";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
+  const [toasts, setToasts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [allMovies, setAllMovies] = useState(null);
   const navigate = useNavigate();
 
-  const handleLogin = ({email, password}, onError) => {
-    Api.login(email, password)
-      .then((response) => {
-        Api.setToken(response.data.token);
-        localStorage.setItem('token', response.data.token);
-        loadInfoAboutCurrentUser();
-        navigate('/')
-      })
-      .catch((error) => {
-        onError(error.message);
-      })
-  }
-
-  const handleRegister = ({email, password, name}, onError) => {
-    Api.register(email, password, name)
-      .then(() => {
-        navigate('/sign-in')
-      })
-      .catch((error) => {
-        onError(error.message);
-      });
+  const handleLogin = (token) => {
+    MainApi.setToken(token);
+    localStorage.setItem('token', token);
+    loadInfoAboutCurrentUser();
+    navigate('/movies')
   }
 
   const loadInfoAboutCurrentUser = () => {
     setIsLoading(true);
-    Api.getCurrentUser()
+    MainApi.getMe()
       .then((response) => {
         setCurrentUser(response.data);
       })
       .catch((error) => {
-        alert(error.message);
+        addToast(new Toast('red', error.message));
         handleLogout();
       })
       .finally(() => {
@@ -55,25 +44,39 @@ function App() {
       })
   }
 
-  const handleEditProfile = () => {
-    console.log('save user info');
+  const handleEditProfile = (data) => {
+    setCurrentUser({
+      ...currentUser,
+      ...data,
+    })
   }
 
   const handleLogout = () => {
     setCurrentUser(null);
     localStorage.removeItem('token');
+    localStorage.removeItem('query');
+    localStorage.removeItem('isShortMovie');
+    navigate('/')
+  }
+
+  const addToast = (toast) => {
+    setToasts([...toasts, toast])
+
+    setTimeout(() => {
+      setToasts(toasts.filter((item) => item.getId() !== toast.getId()))
+    }, 5000)
   }
 
   useEffect(() => {
     // Временно отключено для проверки верстки
-    // const token = localStorage.getItem('token');
-    //
-    // if (token) {
-    //   Api.setToken(token);
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      MainApi.setToken(token);
       loadInfoAboutCurrentUser();
-    // } else {
-    //   setIsLoading(false);
-    // }
+    } else {
+      setIsLoading(false);
+    }
   }, [])
 
   if (isLoading) {
@@ -83,42 +86,71 @@ function App() {
   }
 
   return (
-    <CurrentUserContext.Provider value={currentUser}>
-      <Routes>
-        <Route path="/sign-up" element={
-          <Register onSubmit={handleRegister}/>
-        }/>
-        <Route path="/sign-in" element={
-          <Login onSubmit={handleLogin}/>
-        }/>
-        <Route path="/" element={
-          <Main/>
-        }/>
-        <Route path="/movies" element={
-          <ProtectedRoute currentUser={currentUser}>
-            <Movies/>
-          </ProtectedRoute>
-        }/>
-        <Route path="/movies/favorites" element={
-          <ProtectedRoute currentUser={currentUser}>
-            <Movies/>
-          </ProtectedRoute>
-        }/>
-        <Route path="/profile" element={
-          <ProtectedRoute currentUser={currentUser}>
-            <Profile onLogout={handleLogout}/>
-          </ProtectedRoute>
-        }/>
-        <Route path="/profile/edit" element={
-          <ProtectedRoute currentUser={currentUser}>
-            <EditProfile onSubmit={handleEditProfile}/>
-          </ProtectedRoute>
-        }/>
-        <Route path="*" element={
-          <NotFound />
-        }/>
-      </Routes>
-    </CurrentUserContext.Provider>
+    <div>
+      <CurrentUserContext.Provider value={currentUser}>
+        <MoviesContext.Provider value={{allMovies: allMovies || [], setAllMovies}}>
+          <Routes>
+            <Route
+              path="/signup"
+              element={
+                <Register onSuccess={handleLogin}/>
+              }
+            />
+            <Route
+              path="/signin"
+              element={
+                <Login onSuccess={handleLogin}/>
+              }
+            />
+            <Route
+              path="/"
+              element={
+                <Main/>
+              }
+            />
+            <Route
+              path="/movies"
+              element={
+                <ProtectedRoute currentUser={currentUser}>
+                  <Movies addToast={addToast}/>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/favorites"
+              element={
+                <ProtectedRoute currentUser={currentUser}>
+                  <Favorites addToast={addToast}/>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute currentUser={currentUser}>
+                  <Profile onLogout={handleLogout}/>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/profile/edit"
+              element={
+                <ProtectedRoute currentUser={currentUser}>
+                  <EditProfile onSuccess={handleEditProfile} addToast={addToast}/>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="*"
+              element={
+                <NotFound/>
+              }
+            />
+          </Routes>
+        </MoviesContext.Provider>
+      </CurrentUserContext.Provider>
+      <Toasts list={toasts}/>
+    </div>
   );
 }
 

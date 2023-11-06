@@ -1,11 +1,6 @@
 import './Nav.scss'
 import {Link, useLocation} from "react-router-dom";
-
-const LINKS = [
-  {to: '/', title: 'Главная'},
-  {to: '/movies', title: 'Фильмы'},
-  {to: '/movies/favorites', title: 'Сохраненные фильмы'},
-];
+import {NAVIGATION_LINKS} from "../../config/app";
 
 export default function Nav(props) {
   const classNames = ['nav'];
@@ -25,7 +20,7 @@ export default function Nav(props) {
   const location = useLocation();
   const children = [];
 
-  for (const item of LINKS) {
+  for (const item of NAVIGATION_LINKS) {
     if (props.noIndexPage && item.to === '/') {
       continue;
     }

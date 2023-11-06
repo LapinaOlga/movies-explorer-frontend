@@ -17,15 +17,17 @@ export default function Footer() {
             <div className="footer__item">© {year}</div>
           </div>
           <div className="footer__right">
-            <Link className="footer__item"
-                  to="https://practicum.yandex.ru"
-                  target="_blank"
+            <Link
+              className="footer__item"
+              to="https://practicum.yandex.ru"
+              target="_blank"
             >
               Яндекс.Практикум
             </Link>
-            <Link className="footer__item"
-                  to="https://github.com"
-                  target="_blank"
+            <Link
+              className="footer__item"
+              to="https://github.com"
+              target="_blank"
             >
               GitHub
             </Link>

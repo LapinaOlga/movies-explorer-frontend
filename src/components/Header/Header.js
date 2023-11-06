@@ -42,15 +42,16 @@ export default function Header(props) {
           </Link>
 
           {currentUser &&
-            <Nav variant={props.variant === 'primary' ? 'white' : 'black'}
-                 noIndexPage
+            <Nav
+              variant={props.variant === 'primary' ? 'white' : 'black'}
+              noIndexPage
             />
           }
         </div>
         <div className="header__right">
           {currentUser &&
             <div className="header__dektop">
-              <ProfileButton variant={profileIconVariant} />
+              <ProfileButton variant={profileIconVariant}/>
             </div>
           }
           {currentUser &&
@@ -58,11 +59,12 @@ export default function Header(props) {
               <Button className="header__sandwitch" variant="transparent" onClick={showSidebar}>
                 <img src={sandwich} alt="navigation"/>
               </Button>
-              <Sidebar shown={hasSidebarOpened}
-                       onHide={hideSidebar}
-                       footer={
-                         <ProfileButton variant="gray-3" />
-                       }
+              <Sidebar
+                shown={hasSidebarOpened}
+                onHide={hideSidebar}
+                footer={
+                  <ProfileButton variant="gray-3"/>
+                }
               >
                 <Nav variant="black" vertical/>
               </Sidebar>
@@ -70,10 +72,10 @@ export default function Header(props) {
           }
           {!currentUser &&
             <>
-              <Button variant="transparent" to="/sign-up">
+              <Button variant="transparent" to="/signup">
                 Регистрация
               </Button>
-              <Button variant="green" to="/sign-in">
+              <Button variant="green" to="/signin">
                 Войти
               </Button>
             </>

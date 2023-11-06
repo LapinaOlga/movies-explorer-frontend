@@ -11,7 +11,7 @@ const ProtectedRouteElement = (props) => {
   }
 
   return (
-    <Navigate to="/sign-in" replace/>
+    <Navigate to="/signin" replace/>
   );
 }
 
