@@ -6,6 +6,7 @@ import {useContext, useEffect, useRef, useState} from "react";
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 import {useNavigate} from "react-router-dom";
 import MainApi from "../../utils/MainApi";
+import {EMAIL_PATTERN, NAME_PATTERN} from "../../config/app";
 
 export default function Register(props) {
   const [isLoading, setIsLoading] = useState(false);
@@ -110,7 +111,8 @@ export default function Register(props) {
             autofocus
             disabled={isLoading}
             value={name}
-            pattern="[a-zA-Zа-яёА-ЯË \-]+"
+            pattern={NAME_PATTERN}
+            defaultValidationMessage="Пожалуйста укажите валидное имя"
             onChange={(e) => setName(e.target.value)}
             onInvalid={handleOnInvalid}
             onValid={handleOnValid}
@@ -124,6 +126,8 @@ export default function Register(props) {
             disabled={isLoading}
             value={email}
             autoComplete="username"
+            pattern={EMAIL_PATTERN}
+            defaultValidationMessage="Пожалуйста укажите валидный email"
             onChange={(e) => setEmail(e.target.value)}
             onInvalid={handleOnInvalid}
             onValid={handleOnValid}

@@ -95,6 +95,7 @@ export default function Login(props) {
             disabled={isLoading}
             autoComplete="username"
             pattern={EMAIL_PATTERN}
+            defaultValidationMessage="Пожалуйста укажите валидный email"
             onChange={(e) => setEmail(e.target.value)}
             onInvalid={handleOnInvalid}
             onValid={handleOnValid}

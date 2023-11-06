@@ -16,7 +16,7 @@ export default function Field(props) {
   }, [props.isInvalid])
 
   const handleInvalid = (target) => {
-    setFeedback(target.validationMessage)
+    setFeedback(target.validationMessage || props.defaultValidationMessage)
     setClassNames(['field', 'field--invalid'])
 
     if (typeof props.onInvalid === 'function') {
@@ -34,32 +34,18 @@ export default function Field(props) {
   }
 
   const handleBlur = (e) => {
-    const isValid = e.target.checkValidity();
-
-    if (isValid) {
-      hideValidationError(e.target)
-    }
-
     if (typeof props.onBlur === 'function') {
       props.onBlur(e);
     }
   }
 
   const handleInput = (e) => {
-    const isValid = e.target.checkValidity();
-
-    if (isValid) {
-      hideValidationError(e.target)
-    }
-
     if (typeof props.onInput === 'function') {
       props.onInput(e);
     }
   }
 
   const handleChange = (e) => {
-    e.target.checkValidity()
-
     if (typeof props.onChange === 'function') {
       props.onChange(e);
     }

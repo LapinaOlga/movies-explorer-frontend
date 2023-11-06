@@ -9,6 +9,7 @@ import Container from "../Container/Container";
 import './EditProfile.scss'
 import MainApi from "../../utils/MainApi";
 import Toast from "../../utils/Toast";
+import {EMAIL_PATTERN, NAME_PATTERN} from "../../config/app";
 
 export default function EditProfile(props) {
   const currentUser = useContext(CurrentUserContext);
@@ -94,7 +95,8 @@ export default function EditProfile(props) {
                   required
                   disabled={isLoading}
                   value={name}
-                  pattern="[a-zA-Zа-яёА-ЯË \-]+"
+                  pattern={NAME_PATTERN}
+                  defaultValidationMessage="Пожалуйста укажите валидное имя"
                   onChange={(e) => setName(e.target.value)}
                   onInvalid={handleOnInvalid}
                   onValid={handleOnValid}
@@ -108,6 +110,8 @@ export default function EditProfile(props) {
                   disabled={isLoading}
                   value={email}
                   autocomplete="username"
+                  pattern={EMAIL_PATTERN}
+                  defaultValidationMessage="Пожалуйста укажите валидный email"
                   onChange={(e) => setEmail(e.target.value)}
                   onInvalid={handleOnInvalid}
                   onValid={handleOnValid}
