@@ -17,6 +17,7 @@ export default function EditProfile(props) {
   const [email, setEmail] = useState(currentUser.email);
   const [name, setName] = useState(currentUser.name);
   const [isInvalidForm, setIsInvalidForm] = useState(false);
+  const [isDataChanged, setIsDataChanged] = useState(false);
   const [isNameValid, setIsNameValid] = useState(false);
   const [isEmailValid, setIsEmailValid] = useState(false);
   const navigate = useNavigate();
@@ -26,6 +27,10 @@ export default function EditProfile(props) {
     const isValid = e.target.reportValidity();
 
     if (isValid) {
+      if (!isDataChanged) {
+        return;
+      }
+
       setIsLoading(true);
 
       MainApi.patchMe({name, email})
@@ -78,6 +83,10 @@ export default function EditProfile(props) {
     setIsInvalidForm(!isEmailValid || !isNameValid)
   }, [isEmailValid, isNameValid])
 
+  useEffect(() => {
+    setIsDataChanged(email !== currentUser.email || name !== currentUser.name)
+  }, [email, name])
+
   return (
     <>
       <Header/>
@@ -120,7 +129,8 @@ export default function EditProfile(props) {
                 </Field>
               </FieldList>
               <div className="edit-profile__buttons">
-                <Button variant="orange" type="submit" disabled={isInvalidForm || isLoading}>Сохранить</Button>
+                <Button variant="orange" type="submit"
+                        disabled={isInvalidForm || isLoading || !isDataChanged}>Сохранить</Button>
                 <Button to="/profile" variant="link-orange">Назад</Button>
               </div>
             </div>
